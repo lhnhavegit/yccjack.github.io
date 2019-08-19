@@ -1,523 +1,218 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
 <head><meta name="generator" content="Hexo 3.9.0">
-  <meta charset="utf-8">
-  
-  <title>MysticalYcc</title>
-  <meta name="author" content="俞超超">
+    <meta charset="UTF-8">
+    <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content>
+    <meta name="author" content="俞超超">
+    <meta name="keywords" content>
+    <title>MysticalYcc</title>
+    <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css?v=5.7.2">
+    <link rel="stylesheet" href="/lib/mdbootstrap/css/bootstrap.min.css?v=4.3.1">
+    <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css?v=4.8.7">
+    <link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css">
+    <link rel="stylesheet" href="/lib/nprogress/nprogress.css?v=0.2.0">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+    
+        <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+    
+    <link rel="stylesheet" href="/css/main.css">
 
-  
-
-  
-
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-  
-  <meta property="og:site_name" content="MysticalYcc">
-
-  
-  
-
-  
-    <meta property="og:image" content>
-  
-
-  
-  <link href="/css/images/favicon.ico" rel="icon">
-  
-
-  <link rel="alternate" href="/atom.xml" title="MysticalYcc" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-  
-
-
-  <!-- baidu webmaster push -->
-  <script src="//push.zhanzhang.baidu.com/push.js"></script>
-
+    
 </head>
-</html>
+
 
 <body>
-  <header id="header" class="inner"><div class="alignleft">
-  <h1><a href="/">MysticalYcc</a></h1>
-  <h2><a href="/"></a></h2>
-</div>
-<nav id="main-nav" class="alignright">
-  <ul>
-    
-      <li><a href="/">Home</a></li>
-    
-      <li><a href="/archives">Archives</a></li>
-    
-  </ul>
-  <div class="clearfix"></div>
-</nav>
-<div class="clearfix"></div></header>
-  <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper">
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2019-08-19T10:00:13.228Z"><a href="/2019/08/19/Spring Cloud学习/">2019-08-19</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2019/08/19/Spring Cloud学习/">Spring Cloud</a></h1>
-  
+<header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+<div class="container">
+    <a class="navbar-brand" href="/">&nbsp;<strong>MysticalYcc</strong>&nbsp;</a>
 
-    </header>
-    <div class="entry">
-      
-        <h1 id="Spring-Cloud学习"><a href="#Spring-Cloud学习" class="headerlink" title="Spring Cloud学习"></a>Spring Cloud学习</h1><p> 微服务<br>[TOC]</p>
-<h1 id="1-Spring-boot"><a href="#1-Spring-boot" class="headerlink" title="1. Spring-boot"></a>1. Spring-boot</h1><h2 id="Restful-API"><a href="#Restful-API" class="headerlink" title="Restful API"></a>Restful API</h2><pre><code class="java">@RestController
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto text-center">
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/archives/">Archives</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/categories/">Categories</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/tags/">Tags</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/about/">About</a>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+</nav>
+    <div class="view intro-2"
+         style="background: url('/img/index.jpg')no-repeat center center;background-size: cover;">
+        <div class="full-bg-img">
+            <div class="mask rgba-black-light flex-center">
+                <div class="container text-center white-text wow fadeInUp">
+                    <span class="h2" id="subtitle">
+                        
+                    </span>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    
+        <div class="container nopadding-md">
+            <div class="py-5 z-depth-3 board">
+                
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-md-10 m-auto">
+                            
+
+
+    <div class="row mb-4 mx-auto">
+        
+        
+        <div class="col-12 col-md-8 m-auto">
+            <a href="/2019/08/19/深入浅析内存/">
+                <p class="h4 index-header">深入浅析内存</p>
+                <div class="index-excerpt">
+                    
+                        <div class="index-text mb-1">深入浅析内存除了CPU，内存大概是最重要的计算资源了。基本称为分布式系统标配的缓存中间件、高性能的数据处理系统及当前流行的大数据平台，都离不开对计算机内存的深入理解与巧妙使用。
+你所不知道的内存知识复杂的CPU与单纯的内存首先，我们澄清几个容易让人混淆的CPU术语。
+
+
+Socket或者Processor：指一个屋里CPU芯片，盒装的或者散装的，上面有很多针脚，直接安装在主板上。
+Core：指Socket里封装的一个CPU核心，每个Core都是完全独立的计算单元，我们平时说的4核CPU，就是指一个Socket(Processor)里封装了4个Core。
+HT超线程：目前Intel与AMD的Processor大多支持在一个Core里并行执行两个线程，此时在操作系统看来就相当于两个逻辑CPU(Logical Processor),在大多数情况下，我们在程序里提到CPU这个概念时，就是指一个Logical Processor。
+
+
+&nbsp; &nbsp; 然后，我们先从第一个非常简单的问题开始：CPU可以直接操作内存吗？可能99%的程序员会不假思索的回答：「肯定的，不然程序怎么跑。」如果</div>
+                    
+                </div>
+            </a>
+
+            
+                <div>
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2019-08-19
+                    &nbsp;&nbsp;
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-inbox"></i>
+                        
+                            <a href="/categories/java">java</a>
+                            &nbsp;&nbsp;
+                        
+                    
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
+                        
+                            <a href="/tags/java">java</a>&nbsp;
+                        
+                            <a href="/tags/%E5%86%85%E5%AD%98">内存</a>&nbsp;
+                        
+                    
+                </div>
+            
+        </div>
+    </div>
+
+    <div class="row mb-4 mx-auto">
+        
+        
+        <div class="col-12 col-md-8 m-auto">
+            <a href="/2019/08/19/Spring Cloud学习/">
+                <p class="h4 index-header">Spring Cloud</p>
+                <div class="index-excerpt">
+                    
+                        <div class="index-text mb-1">Spring Cloud学习 微服务[TOC]
+1. Spring-bootRestful API@RestController
 public class DemoController {
     @GetMapping(&quot;/hello&quot;)
     public String demoRest(){
         return &quot;hello&quot;;
     }
-}</code></pre>
-<p>pom.xml:</p>
-<pre><code class="xml">    &lt;properties&gt;
-        &lt;java.version&gt;1.8&lt;/java.version&gt;
-        &lt;spring-cloud.version&gt;Finchley.RELEASE&lt;/spring-cloud.version&gt;
-    &lt;/properties&gt;
-    &lt;dependencies&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-            &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-client&lt;/artifactId&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-            &lt;artifactId&gt;spring-cloud-starter-netflix-ribbon&lt;/artifactId&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-            &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
-            &lt;scope&gt;test&lt;/scope&gt;
-        &lt;/dependency&gt;
-    &lt;/dependencies&gt;
-    &lt;dependencyManagement&gt;
-        &lt;dependencies&gt;
-            &lt;dependency&gt;
-                &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-                &lt;artifactId&gt;spring-cloud-dependencies&lt;/artifactId&gt;
-                &lt;version&gt;${spring-cloud.version}&lt;/version&gt;
-                &lt;type&gt;pom&lt;/type&gt;
-                &lt;scope&gt;import&lt;/scope&gt;
-            &lt;/dependency&gt;
-        &lt;/dependencies&gt;
-    &lt;/dependencyManagement&gt;
-    &lt;build&gt;
-        &lt;plugins&gt;
-            &lt;plugin&gt;
-                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-                &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
-            &lt;/plugin&gt;
-        &lt;/plugins&gt;
-    &lt;/build&gt;</code></pre>
-<p><strong>MockMvc Test</strong></p>
-<pre><code class="java">@RunWith(SpringRunner.class)
-@SpringBootTest
-@WebAppConfiguration
-public class DemoControllerTest {
-    MockMvc mvc;
-    @Before
-    public void setUp() {
-        mvc = MockMvcBuilders.standaloneSetup(new DemoController()).build();
-    }
-    @Test
-    public void demoRest() throws Exception {
-        /**
-         * 1、mockMvc.perform执行一个请求。
-         * 2、MockMvcRequestBuilders.get(&quot;XXX&quot;)构造一个请求。
-         * 3、ResultActions.param添加请求传值
-         * 4、ResultActions.accept(MediaType.TEXT_HTML_VALUE))设置返回类型
-         * 5、ResultActions.andExpect添加执行完成后的断言。
-         * 6、ResultActions.andDo添加一个结果处理器，表示要对结果做点什么事情
-         *   比如此处使用MockMvcResultHandlers.print()输出整个响应结果信息。
-         * 5、ResultActions.andReturn表示执行完成后返回相应的结果。
-         */
-
-        mvc.perform(MockMvcRequestBuilders.get(&quot;/hello&quot;).accept(MediaType.APPLICATION_JSON)
-        ).andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string(&quot;hello&quot;));
-    }
-}</code></pre>
-<h2 id="多环境配置"><a href="#多环境配置" class="headerlink" title="多环境配置"></a>多环境配置</h2><p>多环境配置文件名需要满足application-{profile}.properties的格式,其中{profile}对应环境标识.</p>
-<ul>
-<li>application-dev.properties 开发</li>
-<li>application-dev.properties 测试</li>
-<li>application-dev.properties 生产</li>
-</ul>
-<p>application.properties中通过spring.profile.active属性指定</p>
-<h1 id="2-Spring-Cloud-Erueka"><a href="#2-Spring-Cloud-Erueka" class="headerlink" title="2. Spring Cloud Erueka"></a>2. Spring Cloud Erueka</h1><h2 id="服务治理"><a href="#服务治理" class="headerlink" title="服务治理"></a>服务治理</h2><ul>
-<li><strong>服务注册</strong><br>在服务治理框架中,通常都会构建一个注册中心,每个服务单元想注册中心登记自己提供的服务,将主机与端口、版本号、通信协议等一些附加信息告知注册中心，注册中心按服务名分类组织服务清单。<table>
-<thead>
-<tr>
-<th>服务名</th>
-<th align="left">位置</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>服务A</td>
-<td align="left">192.168.0.100:8000、192.168.0.101:8000</td>
-</tr>
-<tr>
-<td>服务B</td>
-<td align="left">192.168.0.1000:9000、192.168.0.101:9000、192.168.0.102:9000</td>
-</tr>
-</tbody></table>
-</li>
-</ul>
-<ul>
-<li><strong>服务发现</strong><br>由于在服务治理框架下运作，服务间的调用不再通过指定具体的实例地址来实现，而是通过向服务名发起请求调用实现。所以，服务调用方在调用服务提供方接口的时候，并不知道具体的服务实例位置。因此，调用方需要向服务注册中心咨询服务，并获取所有服务的实例清单，以实现对具体服务实例的访问。</li>
-</ul>
-<h2 id="Netflix-Erueka"><a href="#Netflix-Erueka" class="headerlink" title="Netflix Erueka"></a>Netflix Erueka</h2><p>  Eureka服务端，我们也称服务注册中心。它同其他服务注册中心一样，支持高可用配置。它依托于强一致性<a href="[分布式系统之数据分片](https://www.cnblogs.com/xybaby/p/7076731.html)">^consistency</a>提供良好的服务实例可用性，可以应对多种不同的故障场景。如果Eureka以集群模式部署，当集群中有分片<a href="[租约机制简介](https://blog.csdn.net/kevinfankai/article/details/4024937)">^fragmentation</a>出现故障时，那么Eureka就转入自我保护模式。它允许在分片故障期间继续提供服务的发现和注册，当故障分片恢复运行时，集群中的其他分片会把他们的状态再次同步回来。以在AWS上的实践为例，Netflix推荐每个可用的区域运行一个Eureka服务端，通过它来形成集群。不同可用区域的服务注册中心通过异步模式互相复制各自的状态，这意味着在任意给定的时间点每个实例关于所有服务的状态是有细微差别的。<br>    Eureka客户端，主要处理服务的注册与发现。客户端服务通过注解和参数配置的方式，嵌入在客户端应用程序的代码中，在应用程序运行时，Eureka客户端向注册中心注册自身提供的服务并周期性地发送心跳来更新它的服务租约。同时，它也能从服务端查询当前注册的服务信息并把他们缓存到本地并周期性地刷新服务状态。</p>
-<h3 id="搭建服务注册中心"><a href="#搭建服务注册中心" class="headerlink" title="搭建服务注册中心"></a>搭建服务注册中心</h3><p><strong><em>我这边新的版本有点问题用的老版本，请忽略对版本不够新的顾忌。</em></strong></p>
-<ul>
-<li><p><strong>pom.xml</strong></p>
-<pre><code class="xml"> &lt;parent&gt;
-      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-      &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
-      &lt;version&gt;2.0.3.RELEASE&lt;/version&gt;
-      &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;
-  &lt;/parent&gt;
-  &lt;properties&gt;
-      &lt;java.version&gt;1.8&lt;/java.version&gt;
-        &lt;spring-cloud.version&gt;Finchley.RELEASE&lt;/spring-cloud.version&gt;
-  &lt;/properties&gt;
-  &lt;dependencies&gt;
-      &lt;dependency&gt;
-          &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-          &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-server&lt;/artifactId&gt;
-      &lt;/dependency&gt;
-  &lt;/dependencies&gt;
-  &lt;dependencyManagement&gt;
-      &lt;dependencies&gt;
-          &lt;dependency&gt;
-              &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-              &lt;artifactId&gt;spring-cloud-dependencies&lt;/artifactId&gt;
-              &lt;version&gt;${spring-cloud.version}&lt;/version&gt;
-              &lt;type&gt;pom&lt;/type&gt;
-              &lt;scope&gt;import&lt;/scope&gt;
-          &lt;/dependency&gt;
-      &lt;/dependencies&gt;
-  &lt;/dependencyManagement&gt;
-  &lt;build&gt;
-      &lt;plugins&gt;
-          &lt;plugin&gt;
-              &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-              &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
-          &lt;/plugin&gt;
-      &lt;/plugins&gt;
-  &lt;/build&gt;</code></pre>
-</li>
-<li><p>通过@EnableEurekaServer注解启动一个服务注册中心提供给其他应用进行对话。这一步非常简单，只需要在一个普通的Spring Boot应用中添加这个注解就能开启此功能，</p>
-<pre><code class="java">@SpringBootApplication
-@EnableEurekaClient
-public class DemoApplication {
-  public static void main(String[] args) {
-      SpringApplication.run(DemoApplication.class, args);
-  }
-}</code></pre>
-</li>
-<li><p>在默认设置下，该服务注册中心也会将自己作为客户端来尝试注册它自己，所以我们需要禁用它的客户端注册行为，只需要在application。properties中增加如下配置即可：</p>
-<pre><code class="properties">#端口号
-server:
-port: 10001
-spring:
-#项目名称
-application:
-  name: eureka-server
-#服务注册
-eureka:
-instance:
-  hostname: localhost
-client:
-    register-with-eureka: false
-  fetch-registry: false
-  service-url:
-    defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/</code></pre>
-</li>
-<li><p>完成上面的配置后，启动并访问<strong>ip:port</strong> 可以看到Eureka信息面板，其中Instances currently registered with Eureka；栏为空的，说明该注册中心还没有注册任何服务。</p>
-<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1558403834853.png" alt="1558403834853"></p>
-</li>
-<li><p>注册服务提供者</p>
-</li>
-</ul>
-<p><strong>pom.xml</strong></p>
-<pre><code class="xml">&lt;parent&gt;
-        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
-         &lt;version&gt;2.0.3.RELEASE&lt;/version&gt;
-        &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;
-    &lt;/parent&gt;
+}
+pom.xml:
     &lt;properties&gt;
         &lt;java.version&gt;1.8&lt;/java.version&gt;
         &lt;spring-cloud.version&gt;Finchley.RELEASE&lt;/spring-cloud.version&gt;
     &lt;/properties&gt;
     &lt;dependencies&gt;
         &lt;dependency&gt;
-            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-            &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-client&lt;/artifactId&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-            &lt;artifactId&gt;spring-cloud-starter-netflix-ribbon&lt;/artifactId&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-            &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
-            &lt;scope&gt;test&lt;/scope&gt;
-        &lt;/dependency&gt;
-    &lt;/dependencies&gt;
-    &lt;dependencyManagement&gt;
-        &lt;dependencies&gt;
-            &lt;dependency&gt;
-                &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-                &lt;artifactId&gt;spring-cloud-dependencies&lt;/artifactId&gt;
-                &lt;version&gt;${spring-cloud.version}&lt;/version&gt;
-                &lt;type&gt;pom&lt;/type&gt;
-                &lt;scope&gt;import&lt;/scope&gt;
-            &lt;/dependency&gt;
-        &lt;/dependencies&gt;
-    &lt;/dependencyManagement&gt;
-    &lt;build&gt;
-        &lt;plugins&gt;
-            &lt;plugin&gt;
-                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-                &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
-            &lt;/plugin&gt;
-        &lt;/plugins&gt;
-    &lt;/build&gt;</code></pre>
-<pre><code> 修改/hello请求处理接口，通过注入[^@Autowired]DiscoveryClient对象，在日志中打印出服务的相关信息。</code></pre><pre><code class="java">@RestController
-public class HelloController {
-    @Autowired
-    private DiscoveryClient client;
-    @GetMapping(&quot;/hello&quot;)
-    public String index() {
-        List&lt;String&gt; services = client.getServices();
-        services.forEach(System.out::println);
-        return &quot;hello&quot;;
-    }
-}</code></pre>
-<p>​    同时需要在application.yml中将自己注册到Erueka注册中心中。</p>
-<pre><code class="properties">#端口号
-server:
-  port: 8609
-spring:
-  #项目名称
-  application:
-    name: demo-client
-#服务注册
-eureka:
-  instance:
-    hostname: localhost
-    prefer-ip-address: true
-  client:
-    service-url:
-      defaultZone: http://${eureka.instance.hostname}:10001/eureka/</code></pre>
-<p>​    然后，在主类上通过加上@EnableDiscoveryClient 注解，激活Eureka中的DiscoveryClient实现(自动化配置，创建DiscoveryClient接口针对Eureka客户端的EurekaDiscoveryClient实例)，才能实现上述Controller中对服务信息的输出。</p>
-<pre><code class="java">@SpringBootApplication
-@EnableEurekaClient
-public class DemoApplication {
-    public static void main(String[] args) {
-        SpringApplication.run(DemoApplication.class, args);
-    }
-}</code></pre>
-<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1563240154253.png" alt="1563240154253"></p>
-<p>​    分别启动服务注册中心以及这里改造的demo-client服务。在client控制台中打印了该服务的注册信息，表示服务注册成功。</p>
-<p>​    也可以通过访问Eureka信息面板，在Instances currently registered with Eureka中看到服务的注册信息。</p>
-<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1558408333536.png" alt="1558408333536"></p>
-<p>​    通过访问localhost:8609/hello,直接向服务器发起请求，在控制台可以看到如下输出：</p>
-<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1558408530606.png" alt="1558408530606"></p>
-<p>​    这些输出内容就是之前我们在HelloController中注入DiscoveryClient接口对象，从服务注册中心获取的服务相关信息。</p>
-<h2 id="高可用注册中心"><a href="#高可用注册中心" class="headerlink" title="高可用注册中心"></a>高可用注册中心</h2><h3 id="待添加！！！"><a href="#待添加！！！" class="headerlink" title="待添加！！！"></a>待添加！！！</h3><h2 id="服务发现与消费"><a href="#服务发现与消费" class="headerlink" title="服务发现与消费"></a>服务发现与消费</h2><p>​    Ribbon是一个基于HTTP和TCP的客户端负载均衡器，它可以在通过客户端中配置的ribbonServerList服务端列表去轮询访问以达到均衡负载的作用。当Ribbon与Eureka联合使用是，Ribbon的服务实例清单RibbonServerList会被DiscoveryEnabledNIWSServerList重写，扩展成从Eureka注册中心获取服务端列表。同时它会用NIWSDiscoveryPing取代IPing，它将职责委托给Eureka来确定服务端是否已经启动。</p>
-<ul>
-<li>使用java -Dfile.encoding=UTF-8 -jar demo-0.0.1-SNAPSHOT.jar –server.port=XXX启动2个服务，注意改变端口。</li>
-</ul>
-<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1563177482857.png" alt="1563177482857"></p>
-<ul>
-<li><p>创建一个SpringBoot的基础工程来实现服务消费者。</p>
-<p><strong>pom.xml</strong></p>
-<pre><code class="xml"> &lt;parent&gt;
-        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
-        &lt;version&gt;2.0.3.RELEASE&lt;/version&gt;
-        &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;
-    &lt;/parent&gt;
-    &lt;properties&gt;
-        &lt;java.version&gt;1.8&lt;/java.version&gt;
-        &lt;spring-cloud.version&gt;Finchley.RELEASE&lt;/spring-cloud.version&gt;
-    &lt;/properties&gt;
-    &lt;dependencies&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-            &lt;artifactId&gt;spring-boot-starter&lt;/artifactId&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-            &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-client&lt;/artifactId&gt;
-        &lt;/dependency&gt;
-      &lt;dependency&gt;
-            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-          &lt;artifactId&gt;spring-cloud-starter-netflix-ribbon&lt;/artifactId&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-            &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
-            &lt;scope&gt;test&lt;/scope&gt;
-        &lt;/dependency&gt;
-    &lt;/dependencies&gt;
-    &lt;dependencyManagement&gt;
-        &lt;dependencies&gt;
-            &lt;dependency&gt;
-                &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-                &lt;artifactId&gt;spring-cloud-dependencies&lt;/artifactId&gt;
-                &lt;version&gt;${spring-cloud.version}&lt;/version&gt;
-                &lt;type&gt;pom&lt;/type&gt;
-                &lt;scope&gt;import&lt;/scope&gt;
-            &lt;/dependency&gt;
-        &lt;/dependencies&gt;
-  &lt;/dependencyManagement&gt;
+            &lt;groupId&gt;org.springframework.boot&lt</div>
+                    
+                </div>
+            </a>
 
-  &lt;build&gt;
-        &lt;plugins&gt;
-          &lt;plugin&gt;
-                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-              &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
-            &lt;/plugin&gt;
-      &lt;/plugins&gt;
-    &lt;/build&gt;</code></pre>
-<p><strong>application.yml</strong></p>
-<pre><code class="properties">#端口号
-server:
-  port: 8705
-spring:
-  #项目名称
-  application:
-    name: consumer
-#服务注册
-eureka:
-  instance:
-    hostname: localhost
-    prefer-ip-address: true
-  client:
-    service-url:
-      defaultZone: http://${eureka.instance.hostname}:10001/eureka/</code></pre>
-</li>
-</ul>
-<ul>
-<li><p>创建应用ConsumerApplication，必须增加@EnableDiscoveryClient，将自己注册到Eureka上，以获取服务发现的能力。同时，在主类中创建RestTemplate的Spring Bean实例，并通过@LoadBalanced注解开启客户端负载均衡。</p>
-<pre><code class="java">@SpringBootApplication
-@EnableEurekaClient
-public class ConsumerApplication {
-  @Bean
-  @LoadBalanced
-  RestTemplate restTemplate(){
-      return new RestTemplate();
-  }
-  public static void main(String[] args) {
-      SpringApplication.run(ConsumerApplication.class, args);
-  }
-}</code></pre>
-<p>增加ConsumerController，通过RestTemplate来实现对HELLO-SERVICE服务提供的、hello接口进行调用。</p>
-<pre><code class="java">@RestController
-public class ConsumerController {
-  @Autowired
-  RestTemplate restTemplate;
-  @RequestMapping(value = &quot;/consumer&quot;, method = RequestMethod.GET)
-  public String hello() {
-      return restTemplate.getForEntity(&quot;http://demo-client&quot;, String.class).getBody();
-  }
-}</code></pre>
-</li>
-</ul>
-<ul>
-<li><p>启动consumer应用后，可以在Eureka信息面板上看到，除了当前的DEMO-CLIENT外，还多CONSUMER服务。</p>
-<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1563178009619.png" alt="1563178009619"></p>
-</li>
-</ul>
-<ul>
-<li><p>通过 localhost:8705/consumer发起GET请求，成功返回hello，对应的在后台控制台可以看到如下信息,Ribbon输出了当前客户端维护的demo-client的服务列表情况。其中包含了各个实例的位置，Ribbon就是按照此信息进行轮询访问，以实现基于客户端的负载均衡。还输出了各个实例的请求总数量、第一次连接信息、上一次连接信息、总的请求失败数量等有用的信息。</p>
-<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1558680409197.png" alt="1558680409197"></p>
-<p>​    尝试多次发送请求，会发现两个客户端交替打印如下信息。以此也可以判断当前ribbon-consumer对DEMO-CLIENT的调用是否是负载均衡的。</p>
-<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CDesktop%5Cbalance.gif" alt="balance"></p>
-</li>
-</ul>
-<h2 id="Eureka详解"><a href="#Eureka详解" class="headerlink" title="Eureka详解"></a>Eureka详解</h2><h3 id><a href="#" class="headerlink" title></a><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1563173227495.png" alt="1563173227495"></h3><p>​    </p>
-<p>[^@Autowired]: Spring IOC依赖注入</p>
-
-      
-    </div>
-    
-    <footer>
-        <div class="alignright">
-          
-          <a href='javascript:void(0)' class="share-link bdsharebuttonbox" data-cmd="more">分享</a>
+            
+                <div>
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2019-08-19
+                    &nbsp;&nbsp;
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-inbox"></i>
+                        
+                            <a href="/categories/Spring%20Cloud">Spring Cloud</a>
+                            &nbsp;&nbsp;
+                        
+                    
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
+                        
+                            <a href="/tags/java">java</a>&nbsp;
+                        
+                            <a href="/tags/Spring%20Cloud">Spring Cloud</a>&nbsp;
+                        
+                            <a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1">微服务</a>&nbsp;
+                        
+                    
+                </div>
+            
         </div>
+    </div>
+
+    <div class="row mb-4 mx-auto">
         
-  
-  <div class="categories">
-    <a href="/categories/Spring-Cloud/">Spring Cloud</a>
-  </div>
-
         
-  
-  <div class="tags">
-    <a href="/tags/java/">java</a>, <a href="/tags/Spring-Cloud/">Spring Cloud</a>, <a href="/tags/微服务/">微服务</a>
-  </div>
-
-        <!-- partial('post/share') -->
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2019-08-19T10:00:13.222Z"><a href="/2019/08/19/sonarqubSonar/">2019-08-19</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2019/08/19/sonarqubSonar/">sonarQube</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="sonarQube"><a href="#sonarQube" class="headerlink" title="sonarQube"></a>sonarQube</h1><hr>
-<h2 id="Sonarqube搭建"><a href="#Sonarqube搭建" class="headerlink" title="Sonarqube搭建"></a>Sonarqube搭建</h2><h3 id="1、安装"><a href="#1、安装" class="headerlink" title="1、安装"></a>1、安装</h3><p>这里准备的是<strong><em>sonarqube7.7.zip</em></strong>，我的安装路径是/u02/ycc</p>
-<p>使用unzip解压压缩包；</p>
-<p><strong>预置条件</strong></p>
-<p>1).已安装JAVA环境</p>
-<p>2).已安装有MySQL数据库</p>
-<p>3).sonarQube压缩包</p>
-<h3 id="2、数据库配置："><a href="#2、数据库配置：" class="headerlink" title="2、数据库配置："></a>2、数据库配置：</h3><pre><code class="sql"># 创建数据库sonar
+        <div class="col-12 col-md-8 m-auto">
+            <a href="/2019/08/19/sonarqubSonar/">
+                <p class="h4 index-header">sonarQube</p>
+                <div class="index-excerpt">
+                    
+                        <div class="index-text mb-1">sonarQube
+Sonarqube搭建1、安装这里准备的是sonarqube7.7.zip，我的安装路径是/u02/ycc
+使用unzip解压压缩包；
+预置条件
+1).已安装JAVA环境
+2).已安装有MySQL数据库
+3).sonarQube压缩包
+2、数据库配置：# 创建数据库sonar
 create database sonar character set utf8 collate utf8_general_ci;
 
 # 创建数据库用户sonar可用地址为192.168.6.226密码sonar
@@ -527,831 +222,206 @@ CREATE USER sonar@&#39;192.168.6.226&#39; identified by &#39;sonar&#39;;
 grant all on sonar.* to &#39;sonar&#39;@&#39;%&#39; identified by &#39;sonar&#39;;
 
 # 授权sonar用户可以在本地连接数据库
-grant all on sonar.* to &#39;sonar&#39;@&#39;localhost&#39; identified by &#39;sonar&#39;;
+grant all on sonar.* to &#39;sonar&#3</div>
+                    
+                </div>
+            </a>
 
-# 授权sonar用户可以在226连接数据库
-grant all on sonar.* to &#39;sonar&#39;@&#39;192.168.6.226&#39; identified by &#39;sonar&#39;;
-
-# 刷新权限
-flush privileges;</code></pre>
-<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564051508551.png" alt="1564051508551"></p>
-<p><strong>对权限的所有操作最后需要刷新下权限，即flush privileges;使之更改立马生效。</strong></p>
-<h3 id="3、修改sonar配置文件：sonar-properties"><a href="#3、修改sonar配置文件：sonar-properties" class="headerlink" title="3、修改sonar配置文件：sonar.properties"></a>3、修改sonar配置文件：sonar.properties</h3><p><strong>我的数据库在17，使用时更改这个地址到自己的数据库地址即可。</strong></p>
-<pre><code class="prop">sonar.jdbc.username=sonar
-sonar.jdbc.password=sonar
-sonar.jdbc.url=jdbc:mysql://192.168.6.17:3306/sonar?useUnicode=true&amp;characterEncoding=utf8&amp;rewriteBatchedStatements=true&amp;useConfigs=maxPerformance&amp;useSSL</code></pre>
-<p><strong>修改wrapper配置文件的java路径</strong></p>
-<p>wrapper配置文件额sonar.properties在同一个目录里，这里需要注意一点，路径后面需要额外加上/java。不加会报</p>
-<p>Unable to start JVM: Permission denied (13)的错误。</p>
-<pre><code class="properties">wrapper.java.command=/u02/ycc/jdk1.8.0_161/bin/java</code></pre>
-<p><strong>启动</strong></p>
-<pre><code class="pro">sh /u02/ycc/sonar.../bin/linux.../sonar.sh start</code></pre>
-<p>如果使用root的话会出现如下错误：</p>
-<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564098693803.png" alt="1564098693803"></p>
-<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564098711687.png" alt="1564098711687"></p>
-<p>换个用户，并赋予这个用户sonar目录的权限即可。</p>
-<h3 id="4、启动sonarqube"><a href="#4、启动sonarqube" class="headerlink" title="4、启动sonarqube"></a>4、启动sonarqube</h3><p>  将中文插件sonar-l10n-zh-plugin-1.28.jar复制到extensions/plugins</p>
-<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564122590906.png" alt="1564122590906"></p>
-<h3 id="5、安装SonarQube-Scanner和配置"><a href="#5、安装SonarQube-Scanner和配置" class="headerlink" title="5、安装SonarQube Scanner和配置"></a>5、安装SonarQube Scanner和配置</h3><pre><code class="html">//解压文件
-//进入文件
-//编辑文件
-[root@localhost local]#unzip  sonar-scanner-cli-3.0.3.778-linux.zip
-[root@localhost local]#mv sonar-scanner-cli-3.0.3.778-linux  sonar-scanner
-[root@localhost local]# cd sonar-scanner
-[root@localhost sonar-scanner]# vim conf/sonar-scanner.properties </code></pre>
-<pre><code class="pr">#Configure here general information about the environment, such as SonarQube DB details for example
-#No information about specific project should appear here
-#----- Default source code encoding
-sonar.sourceEncoding=UTF-8
-
-sonar.host.url=http://192.168.6.226:9000
-sonar.jdbc.username=sonar
-sonar.jdbc.password=sonar
-sonar.jdbc.url=jdbc:mysql://192.168.6.17:3306/sonar?useUnicode=true&amp;characterEncoding=utf8
-sonar.login=sonar
-sonar.password=sonar</code></pre>
-<p>在项目的根目录创建sonar-project.properties </p>
-<pre><code class="proper">#sonar登陆用户
-sonar.login=admin
-#sonar登陆密码
-sonar.password=admin
-#需要扫描的项目对应的key自定义即可
-sonar.projectKey=content-receive
-#需要扫描的项目对应的显示项目名自定义即可
-sonar.projectName=content-receive
-sonar.projectVersion=1.0-SNAPSHOT
-sonar.sourceEncoding=UTF-8
-sonar.language=java
-#扫描的源码位置
-sonar.sources=src/main/java/com/jsc/content
-#扫描的test位置
-sonar.tests=src/test/java/com/jsc/content
-#扫描java的源码位置
-sonar.java.binaries=target/classes/com/jsc/content</code></pre>
-<p>在项目当前目录执行scanner ：</p>
-<pre><code>sh /sonarscannerdir/bin/sonar-scanner -X</code></pre><p>运行结束在sonarQube页面即可看到刚才扫描的项目。</p>
-<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564109007362.png" alt="1564109007362"></p>
-<h3 id="6、maven-sonar-plugin"><a href="#6、maven-sonar-plugin" class="headerlink" title="6、maven-sonar-plugin"></a>6、maven-sonar-plugin</h3><p>对于Maven项目，除了使用SonarQube Scanner进行分析之外，还可以使用maven-sonar-plugin插件进行分析。使用maven-sonar-plugin插件的步骤如下：(setting.xml)</p>
-<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564110217662.png" alt="1564110217662"></p>
-<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564110205988.png" alt="1564110205988"></p>
-<pre><code class="xml">    &lt;profile&gt;
-        &lt;id&gt;sonar&lt;/id&gt;
-        &lt;activation&gt;
-        &lt;activeByDefault&gt;true&lt;/activeByDefault&gt;
-        &lt;/activation&gt;
-        &lt;properties&gt;
-        &lt;sonar.jdbc.url&gt;jdbc:mysql://192.168.6.226:3306/sonar&lt;/sonar.jdbc.url&gt;
-        &lt;sonar.jdbc.username&gt;sonar&lt;/sonar.jdbc.username&gt;
-        &lt;sonar.jdbc.password&gt;sonar&lt;/sonar.jdbc.password&gt;
-            &lt;sonar.host.url&gt;http://192.168.6.226:9000&lt;/sonar.host.url&gt;
-        &lt;/properties&gt;
-
-        &lt;/profile&gt; 
-  &lt;/profiles&gt;
-   &lt;activeProfiles&gt;
-        &lt;activeProfile&gt;UFindNexus&lt;/activeProfile&gt;
-        &lt;activeProfile&gt;sonar&lt;/activeProfile&gt;
-    &lt;/activeProfiles&gt;</code></pre>
-<p><strong>pom.xml</strong>的<strong>build</strong>中增加如下配置：</p>
-<pre><code class="xml"> &lt;pluginManagement&gt;
-            &lt;plugins&gt;
-                &lt;plugin&gt;
-                    &lt;groupId&gt;org.sonarsource.scanner.maven&lt;/groupId&gt;
-                    &lt;artifactId&gt;sonar-maven-plugin&lt;/artifactId&gt;
-                    &lt;version&gt;3.1.1&lt;/version&gt;
-                &lt;/plugin&gt;
-            &lt;/plugins&gt;
-        &lt;/pluginManagement&gt;</code></pre>
-<p>在对应项目的控制台输入mvn clean verify sonar:sonar<br>或mvn clean install org.sonarsource.scanner.maven:sonar-maven-plugin:3.1.1:sonar执行扫描；这里注意，如果有多个maven的setting.xml会使用环境变量配置的setting.xml。执行完即可在sonarqube页面查看。</p>
-<p>如果这里执行报错的话可以使用IDEA的run maven运行：</p>
-<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564121819350.png" alt="1564121819350"></p>
-<p>也可以在pom.xml中增加profile,此时选中sonar-project,执行 clean install sonar:sonar即可。</p>
-<pre><code class="xml">    &lt;profiles&gt;
-        &lt;profile&gt;
-            &lt;id&gt;sonar-project&lt;/id&gt;
-            &lt;activation&gt;
-                &lt;activeByDefault&gt;true&lt;/activeByDefault&gt;
-            &lt;/activation&gt;
-            &lt;properties&gt;
-                &lt;sonar.jdbc.url&gt;jdbc:mysql://192.168.6.213:3306/sonar&lt;/sonar.jdbc.url&gt;
-                &lt;sonar.jdbc.username&gt;root&lt;/sonar.jdbc.username&gt;
-                &lt;sonar.jdbc.password&gt;passok&lt;/sonar.jdbc.password&gt;
-                &lt;sonar.host.url&gt;http://192.168.6.213:9000&lt;/sonar.host.url&gt;
-                &lt;!-- 需要忽略的--&gt;
-                &lt;sonar.exclusions&gt;src/main/java/com/jsc/codec/**&lt;/sonar.exclusions&gt;
-            &lt;/properties&gt;
-        &lt;/profile&gt;
-    &lt;/profiles&gt;</code></pre>
-<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564121973140.png" alt="1564121973140"></p>
-<hr>
-<h2 id="Sonarqube使用"><a href="#Sonarqube使用" class="headerlink" title="Sonarqube使用"></a>Sonarqube使用</h2><p>SonarQube 是一个开源的代码分析平台, 用来持续分析和评测项目源代码的质量。 通过SonarQube我们可以检测出项目中重复代码， 潜在bug， 代码规范，安全性漏洞等问题， 并通过SonarQube web UI展示出来。</p>
-<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564124669244.png" alt="1564124669244"></p>
-<h3 id="1-SonarQube扫描方法"><a href="#1-SonarQube扫描方法" class="headerlink" title="1.SonarQube扫描方法"></a>1.SonarQube扫描方法</h3><p>Jenkins中调用<br>通过jenkins插件调用sonarScanner或使用Maven、Gradle等内置扫描器<br>依据项目需要，对代码持续扫描，并将结果推送到sonarqube 进行页面展示</p>
-<p>SonarQube Scanner<br>使用scanner，通过配置文件，修改项目信息，在命令行中调用scanner工具，进行扫描，并推送给sonarqube</p>
-<p>Maven、Gradle等内置扫描器 </p>
-<p>以maven为例，需要修改maven和sonarqube配置文件，在mvn编译后，使用mvn命令，进行代码扫描，并推送给sonarqube（需要编译源代码） ,参见上文。</p>
-<h3 id="2-SonarQube-web-UI"><a href="#2-SonarQube-web-UI" class="headerlink" title="2.SonarQube web UI"></a>2.SonarQube web UI</h3><p>显示用户所有的项目概况，各项目质量评级，并提供条件筛选 </p>
-<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564125155644.png" alt="1564125155644"></p>
-<h3 id="3-SonarQube-web-UI-–项目页面"><a href="#3-SonarQube-web-UI-–项目页面" class="headerlink" title="3.SonarQube web UI –项目页面"></a>3.SonarQube web UI –项目页面</h3><p>通过在主页面选择单个项目，进入项目详情，该页面提供了当前项目最近一次扫描的结果评级，历史累计和新增问题数量，代码行数等信息 。</p>
-<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564125184892.png" alt="1564125184892"></p>
-<h3 id="4-SonarQube-web-UI-–问题页面"><a href="#4-SonarQube-web-UI-–问题页面" class="headerlink" title="4.SonarQube web UI –问题页面"></a>4.SonarQube web UI –问题页面</h3><p>提供当前用户名下所有问题的列表，并提供条件筛选，包括问题类型，严重程度等<br>在当个项目中，问题页面显示单项目信息 。</p>
-<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564125329743.png" alt="1564125329743"></p>
-<p>选中单个问题，查看问题代码详情，sonarqube给出问题描述和修改意见 。</p>
-<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564125632530.png" alt="1564125632530"></p>
-<h3 id="5-SonarQube-web-UI-–评估页面"><a href="#5-SonarQube-web-UI-–评估页面" class="headerlink" title="5.SonarQube web UI –评估页面"></a>5.SonarQube web UI –评估页面</h3><p>给出当前项目的评估概况信息，大小，可靠性，重复率，覆盖率等 。</p>
-<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564125742365.png" alt="1564125742365"></p>
-<h3 id="6-SonarQube-web-UI-–代码页面"><a href="#6-SonarQube-web-UI-–代码页面" class="headerlink" title="6.SonarQube web UI –代码页面"></a>6.SonarQube web UI –代码页面</h3><p>以.java文件为依据，给出各个.java文件统计信息 。</p>
-<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564126037590.png" alt="1564126037590"></p>
-<h3 id="7-SonarQube-web-UI-–活动页面"><a href="#7-SonarQube-web-UI-–活动页面" class="headerlink" title="7.SonarQube web UI –活动页面"></a>7.SonarQube web UI –活动页面</h3><p>页面展示了每次代码扫描的基本信息和代码情况的折线图，折线图可以根据需要调整显示bugs数量，代码行数，覆盖率等信息 。</p>
-<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564126123324.png" alt="1564126123324"></p>
-<hr>
-<h2 id="SonarQube-Jekins集成"><a href="#SonarQube-Jekins集成" class="headerlink" title="SonarQube Jekins集成"></a>SonarQube Jekins集成</h2><h3 id="1、安装jenkins-sonar插件。"><a href="#1、安装jenkins-sonar插件。" class="headerlink" title="1、安装jenkins sonar插件。"></a>1、安装jenkins sonar插件。</h3><p>略</p>
-<h3 id="2、配置sonarServer"><a href="#2、配置sonarServer" class="headerlink" title="2、配置sonarServer"></a>2、配置sonarServer</h3><p>进入系统管理–&gt;系统配置界面。(这里选择测试环境的sonarQube地址)</p>
-<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564123349587.png" alt="1564123349587"></p>
-<p>进入系统管理–&gt;全局工具配置</p>
-<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564123462680.png" alt="1564123462680"></p>
-<h3 id="3、构建项目"><a href="#3、构建项目" class="headerlink" title="3、构建项目"></a>3、构建项目</h3><p>回到主页找到需要配置的项目，如果没有则需要新建项目，这里不赘述如何创建。选中项目配置sonar(这里使用</p>
-<p>sonar-scanner)。</p>
-<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564124297347.png" alt="1564124297347"></p>
-<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564123835385.png" alt="1564123835385"></p>
-<p>在构建历史中可以看到运行中的构建，点进去查看信息：</p>
-<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564124138444.png" alt="1564124138444"></p>
-<p>另外一种方式是使用maven命令打包，此时需要配置setting.xml，配置见前文。</p>
-<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564128857055.png" alt="1564128857055"></p>
-<h3 id="4、查看结果"><a href="#4、查看结果" class="headerlink" title="4、查看结果"></a>4、查看结果</h3><p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564124244878.png" alt="1564124244878"></p>
-
-      
-    </div>
-    
-    <footer>
-        <div class="alignright">
-          
-          <a href='javascript:void(0)' class="share-link bdsharebuttonbox" data-cmd="more">分享</a>
+            
+                <div>
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2019-08-19
+                    &nbsp;&nbsp;
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-inbox"></i>
+                        
+                            <a href="/categories/sonarQube">sonarQube</a>
+                            &nbsp;&nbsp;
+                        
+                    
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
+                        
+                            <a href="/tags/sonarQube">sonarQube</a>&nbsp;
+                        
+                    
+                </div>
+            
         </div>
-        
-  
-  <div class="categories">
-    <a href="/categories/sonarQube/">sonarQube</a>
-  </div>
-
-        
-  
-  <div class="tags">
-    <a href="/tags/sonarQube/">sonarQube</a>
-  </div>
-
-        <!-- partial('post/share') -->
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2019-08-19T10:00:13.019Z"><a href="/2019/08/19/SeaweedFS/">2019-08-19</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2019/08/19/SeaweedFS/">SeaweedFS</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="SeaweedFS"><a href="#SeaweedFS" class="headerlink" title="SeaweedFS"></a>SeaweedFS</h1><p>[TOC]</p>
-<h2 id="SeaweedFS简介"><a href="#SeaweedFS简介" class="headerlink" title="SeaweedFS简介"></a>SeaweedFS简介</h2><p>SeaweedFS是基于go语言开发的高可用文件存储系统，主要特征</p>
-<blockquote>
-<ul>
-<li>存储上亿的文件(最终受限制于硬盘大小)</li>
-<li>速度快，内存占用小</li>
-</ul>
-</blockquote>
-<br>
-
-<p>上手使用比fastDFS要简单很多，自带Rest API。</p>
-<p>SeaWeeDFS作为对象存储库来有效地处理小文件。不是管理中央主机中的所有文件元数据，中央主机只管理文件卷，它允许这些卷服务器管理文件和它们的元数据。<br>这减轻了来自中央主机的并发压力，并将文件元数据扩展到卷服务器，允许更快的文件访问（仅一个磁盘读取操作）。</p>
-<br>
-
-<p>每个文件的元数据只有40字节的磁盘存储开销。</p>
-<br>
-
-<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>seaweedfs是一个非常优秀的由 golang 开发的分布式存储开源项目。它是用来存储文件的系统，并且与使用的语言无关，使得文件储存在云端变得非常方便。</p>
-<p>在逻辑上Seaweedfs的几个概念：</p>
-<blockquote>
-<ul>
-<li><p>Node 系统抽象的节点，抽象为DataCenter、Rack、DataNode</p>
-</li>
-<li><p>DataCenter 数据中心，对应现实中的不同机房</p>
-</li>
-<li><p>Rack 机架，对应现实中的机柜</p>
-</li>
-<li><p>Datanode 存储节点，用于管理、存储逻辑卷</p>
-</li>
-<li><p>Volume 逻辑卷，存储的逻辑结构，逻辑卷下存储Needle</p>
-</li>
-<li><p>Needle 逻辑卷中的Object，对应存储的文件</p>
-</li>
-<li><p>Collection 文件集，可以分布在多个逻辑卷上</p>
-</li>
-</ul>
-</blockquote>
-<h2 id="搭建服务"><a href="#搭建服务" class="headerlink" title="搭建服务"></a>搭建服务</h2><h3 id="安装go环境"><a href="#安装go环境" class="headerlink" title="安装go环境"></a>安装go环境</h3><blockquote>
-<ul>
-<li>查看系统位数 getconf LONG_BIT</li>
-<li>下载源码包</li>
-<li>选择对应版本</li>
-</ul>
-</blockquote>
-<pre><code>cd /usr/local
-# 下载
-wget https://golangtc.com/static/go/1.9.2/go1.9.2.linux-amd64.tar.gz
-# 将其传到其他两台机器
-# 解压
-tar -zxf go1.9.2.linux-amd64.tar.gz
-# 配置
-vim /etc/profile
-#加入
-export GOPATH=/opt/go
-export GOROOT=/usr/local/go
-export GOOS=linux
-export GOBIN=$GOROOT/bin
-export GOTOOLS=$GOROOT/pkg/tool/
-export PATH=$PATH:$GOBIN:$GOTOOLS
-
-# 使配置文件生效
-source /etc/profile
-
-# 查看
-go version</code></pre><h3 id="安装seaweedfs"><a href="#安装seaweedfs" class="headerlink" title="安装seaweedfs"></a>安装seaweedfs</h3><p>(1)下载 <a href="https://github.com/chrislusf/seaweedfs/releases/选择对应的版本" target="_blank" rel="noopener">https://github.com/chrislusf/seaweedfs/releases/选择对应的版本</a><br>(2)解压 tar -zxf linux_amd64.tar.gz<br>(3)./weed -h 查看帮助创建运行需要的目录   </p>
-<pre><code class="xml">/../data            
- /../ vol/vol[1-3]    
- /../logs</code></pre>
-<p>(4)配置运行master(如单机删除defaultReplication)</p>
-<pre><code class="xml">./weed master -mdir=/../data -port=9333 -defaultReplication=&quot;001&quot; -ip=&quot;172.16.20.71&quot; &amp;&gt;&gt; /../logs/master.log &amp;
-</code></pre>
-<p>(5) 配置运行volume</p>
-<p>具体参数查看帮助<br>/usr/local/weed volume -h</p>
-<pre><code class="xml">./weed volume -port=9331 -dir=vol/vol1/ -max=100 -mserver=&quot;192.168.6.224:9333&quot; -ip=&quot;192.168.6.224&quot; &amp;&gt;vol/vol1/vol1.log &amp;</code></pre>
-<h2 id="Java操作SeaweedFS"><a href="#Java操作SeaweedFS" class="headerlink" title="Java操作SeaweedFS"></a>Java操作SeaweedFS</h2><p>首先导入pom依赖</p>
-<pre><code class="xml">     &lt;dependency&gt;
-            &lt;groupId&gt;net.anumbrella.seaweedfs&lt;/groupId&gt;
-            &lt;artifactId&gt;seaweedfs-java-client&lt;/artifactId&gt;
-            &lt;version&gt;0.0.2.RELEASE&lt;/version&gt;
-        &lt;/dependency&gt;</code></pre>
-<p>编写SeaweedFS配置类SeaweedFSConfig</p>
-<pre><code class="java">@Configuration
-public class SeaweedFSConfig {
-
-    @Value(&quot;${seaweedfs.host}&quot;)
-    private String host;
-    @Value(&quot;${seaweedfs.port}&quot;)
-    private int port;
-
-    @Bean
-    public FileTemplate fileTemplate() {
-        FileSource fileSource = new FileSource();
-        // SeaweedFS master服务ip地址
-        fileSource.setHost(host);
-        // SeaweedFS master服务端口
-        fileSource.setPort(port);
-        try {
-            // 启动服务
-            fileSource.startup();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return new FileTemplate(fileSource.getConnection());
-    }
-}</code></pre>
-<p>我的application.properties配置文件如下:</p>
-<pre><code class="xml">seaweedfs.host=192.168.6.224 #多个ip地址用逗号隔开
-seaweedfs.port=9333</code></pre>
-<p>上传文件的方法如下,用的是Spring的JUnit测试:</p>
-<pre><code class="java">@Autowired
-private FileTemplate template;
-
-@Test
-public void testSeaweedFS() throws IOException {
-        // 上传可以指定文件名
-        FileHandleStatus handleStatus = template.saveFileByStream(&quot;file.type&quot;, new FileInputStream(new File(&quot;filePath&quot;)));
-        // 获取文件ID,可通过这个ID获取到文件
-        String fileId = handleStatus.getFileId();
-        StreamResponse fileStream = template.getFileStream(fileId);
-        InputStream inputStream = fileStream.getInputStream();
-        // 获取流之后流拷贝输出到本地
-        IOUtils.copy(inputStream,new FileOutputStream(new File(&quot;outPath&quot;)));
-    }</code></pre>
-
-      
     </div>
-    
-    <footer>
-        <div class="alignright">
-          
-          <a href='javascript:void(0)' class="share-link bdsharebuttonbox" data-cmd="more">分享</a>
+
+    <div class="row mb-4 mx-auto">
+        
+        
+        <div class="col-12 col-md-8 m-auto">
+            <a href="/2019/08/19/SeaweedFS/">
+                <p class="h4 index-header">SeaweedFS</p>
+                <div class="index-excerpt">
+                    
+                        <div class="index-text mb-1">SeaweedFS[TOC]
+SeaweedFS简介SeaweedFS是基于go语言开发的高可用文件存储系统，主要特征
+
+
+存储上亿的文件(最终受限制于硬盘大小)
+速度快，内存占用小
+
+
+
+
+上手使用比fastDFS要简单很多，自带Rest API。
+SeaWeeDFS作为对象存储库来有效地处理小文件。不是管理中央主机中的所有文件元数据，中央主机只管理文件卷，它允许这些卷服务器管理文件和它们的元数据。这减轻了来自中央主机的并发压力，并将文件元数据扩展到卷服务器，允许更快的文件访问（仅一个磁盘读取操作）。
+
+
+每个文件的元数据只有40字节的磁盘存储开销。
+
+
+概述seaweedfs是一个非常优秀的由 golang 开发的分布式存储开源项目。它是用来存储文件的系统，并且与使用的语言无关，使得文件储存在云端变得非常方便。
+在逻辑上Seaweedfs的几个概念：
+
+
+Node 系统抽象的节点，抽象为DataCenter、Rack、DataNode
+
+DataCenter 数据中心，对应现实中的不同机房
+
+Rack 机架，对应现实中的机柜
+
+Datanode 存储节点，用于管理、存储逻辑卷
+
+V</div>
+                    
+                </div>
+            </a>
+
+            
+                <div>
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2019-08-19
+                    &nbsp;&nbsp;
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-inbox"></i>
+                        
+                            <a href="/categories/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F">文件系统</a>
+                            &nbsp;&nbsp;
+                        
+                    
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
+                        
+                            <a href="/tags/SeaweedFS">SeaweedFS</a>&nbsp;
+                        
+                            <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F">分布式文件系统</a>&nbsp;
+                        
+                    
+                </div>
+            
         </div>
+    </div>
+
+    <div class="row mb-4 mx-auto">
         
-  
-  <div class="categories">
-    <a href="/categories/文件系统/">文件系统</a>
-  </div>
-
         
-  
-  <div class="tags">
-    <a href="/tags/SeaweedFS/">SeaweedFS</a>, <a href="/tags/分布式文件系统/">分布式文件系统</a>
-  </div>
+        <div class="col-12 col-md-8 m-auto">
+            <a href="/2019/08/19/powermock/">
+                <p class="h4 index-header">Mockito和PowerMock用法</p>
+                <div class="index-excerpt">
+                    
+                        <div class="index-text mb-1">Mockito和PowerMock用法
+[TOC]
 
-        <!-- partial('post/share') -->
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2019-08-19T10:00:12.980Z"><a href="/2019/08/19/powermock/">2019-08-19</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2019/08/19/powermock/">Mockito和PowerMock用法</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="Mockito和PowerMock用法"><a href="#Mockito和PowerMock用法" class="headerlink" title="Mockito和PowerMock用法"></a>Mockito和PowerMock用法</h1><hr>
-<p>[TOC]</p>
-<hr>
-<h2 id="一、mock测试和Mock对象"><a href="#一、mock测试和Mock对象" class="headerlink" title="一、mock测试和Mock对象"></a>一、mock测试和Mock对象</h2><p>mock对象就是在调试期间用来作为真实对象的替代品<br>mock测试就是在测试过程中，对那些不容易构建的对象用一个虚拟对象来代替测试的方法就叫mock测试</p>
-<h2 id="二、Mockito和PowerMock"><a href="#二、Mockito和PowerMock" class="headerlink" title="二、Mockito和PowerMock"></a>二、Mockito和PowerMock</h2><p>  PowerMock是Java开发中的一种Mock框架，用于单元模块测试。当你想要测试一个service接口，但service需要经过防火墙访问，防火墙不能为你打开或者你需要认证才能访问。遇到这样情况时，你可以在你能访问的地方使用MockService替代，模拟实现获取数据。<br>  PowerMock可以实现完成对private/static/final方法的Mock（模拟），而Mockito可以对普通的方法进行Mock，如：public等。</p>
-<h2 id="三、Mockito的使用"><a href="#三、Mockito的使用" class="headerlink" title="三、Mockito的使用"></a>三、Mockito的使用</h2><pre><code class="java">// 1、模拟HttpServletRequest对象，不需要依赖web容器，模拟获得请求参数
+一、mock测试和Mock对象mock对象就是在调试期间用来作为真实对象的替代品mock测试就是在测试过程中，对那些不容易构建的对象用一个虚拟对象来代替测试的方法就叫mock测试
+二、Mockito和PowerMock  PowerMock是Java开发中的一种Mock框架，用于单元模块测试。当你想要测试一个service接口，但service需要经过防火墙访问，防火墙不能为你打开或者你需要认证才能访问。遇到这样情况时，你可以在你能访问的地方使用MockService替代，模拟实现获取数据。  PowerMock可以实现完成对private/static/final方法的Mock（模拟），而Mockito可以对普通的方法进行Mock，如：public等。
+三、Mockito的使用// 1、模拟HttpServletRequest对象，不需要依赖web容器，模拟获得请求参数
 HttpServletRequest request = mock(HttpServletRequest.class); 
-when(request.getParameter(&quot;foo&quot;)).thenReturn(&quot;boo&quot;);
-// 注意:mock()是Mockito的静态方法，可以用@mock注解替换
-private @mock HttpServletRequest request</code></pre>
-<pre><code class="java">// 2、Person person =mock(Person.class);
-// 第一次调用返回&quot;xiaoming&quot;，第二次调用返回&quot;xiaohong&quot;
-when(person.getName()).thenReturn(&quot;xiaoming&quot;).thenReturn(&quot;xiaohong&quot;); 
-when(person.getName()).thenReturn(&quot;xiaoming&quot;, &quot;xiaohong&quot;); 
-when(person.getName()).thenReturn(&quot;xiaoming&quot;); 
-when(person.getName()).thenReturn(&quot;xiaohong&quot;);</code></pre>
-<pre><code class="java">// 3、mockito模拟测试无返回值的方法
-Person person =mock(Person.class);
-doNothing().when(person).remove();</code></pre>
-<pre><code class="java">// 4、mockito还能对被测试的方法强行抛出异常
-Person person =mock(Person.class);
-doThrow(new RuntimeException()).when(person).remove();
-when(person.next()).thenThrow(new RuntimeException());</code></pre>
-<pre><code class="java">// 5、//UserAppService用于参数匹配器的demo
-参数匹配器
-    UserApp app = new UserApp();
-    app.setAppKey(&quot;q1w2e3r4t5y6u7i8o9p0&quot;);
-    app.setAppSecret(&quot;q1w2e3r4t5y6u7i8o9p0&quot;);
-    when(userAppMapper.getAppSecretByAppKey(argThat(new ArgumentMatcher&lt;String&gt;() {
-        @Override
-        public boolean matches(Object argument) {
-            String arg = (String) argument;
-            if (arg.equals(&quot;1234567890&quot;) || arg.equals(&quot;q1w2e3r4t5y6u7i8o9p0&quot;)) {
-                return true;
-            } else {
-                throw new RuntimeException();
-            }
-        }
-    }))).thenReturn(app);</code></pre>
-<pre><code class="java">// 6、Answer接口模拟根据参数返回不同结果
-    when(userAppMapper.getAppSecretByAppKey(anyString())).thenAnswer(
-            (InvocationOnMock invocationOnMock) -&gt; {
-                String arg = (String) invocationOnMock.getArguments()[0];
-                if (null == arg || arg.equals(null)) {
-                    return null;
-                } else if (arg.equals(&quot;q1w2e3r4t5y6u7i8o9p0&quot;)) {
-                    UserApp app = new UserApp();
-                    app.setAppKey(&quot;q1w2e3r4t5y6u7i8o9p0&quot;);
-                    app.setAppSecret(&quot;q1w2e3r4t5y6u7i8o9p0&quot;);
-                    return app;
-                } else {
-                    return null;
-                }
+when(request.getPar</div>
+                    
+                </div>
+            </a>
 
-            });
-</code></pre>
-<pre><code class="java">// 7、Mock对象是能调用模拟方法，调用不了它真实的方法，但是spy() 或者@spy 可以监视一个真实的对象，对它进行方法调用时它将调用真实的方法，同时也可以设定这个对象的方法让它返回我们的期望值。同时，我们也可以用verify进行验证。
-class A {
-  public void goHome() {  
-      System.out.println(&quot;I say go go go!!&quot;); 
-       return true; 
-   }  
- }
-  //  当需要整体Mock，只有少部分方法执行真正部分时，选用这种方式 
-   A mockA = Mockito.mock(A.class);   
-   Mockito.doCallRealMethod().when(mockA).goHome(); 
-  // 当需要整体执行真正部分，只有少部分方法执行mock，选用这种方式  
-   A spyA = Mockito.spy(new A());   
-   Mockito.when(spyA.goHome()).thenReturn(false); </code></pre>
-<p><strong>Demo演示</strong></p>
-<pre><code class="java">//目标测试类
-@Service
-public class UserAppService {
-
-    @Autowired
-    private UserAppMapper userAppMapper;
-
-    /**
-     * 通过appKey查询AppSecre
-     * @return
-     */
-    public String getAppSecretByAppKey(String appKey){
-        if (StringUtils.isEmpty(appKey)) {
-            return null;
-        }
-        UserApp userApp = userAppMapper.getAppSecretByAppKey(appKey);
-        if (null == userApp) {
-            return null;
-        }
-        return userApp.getAppSecret();
-    }
-}
-@RunWith(SpringJUnit4ClassRunner.class)
-public class UserAppServiceTest {
-    @InjectMocks //创建一个实例，其余用@Mock（或@Spy）注解创建的mock将被注入到用该实例中
-    private UserAppService userAppService;
-    @Mock
-    private UserAppMapper userAppMapper;
-    @Before
-    public void setUp() { MockitoAnnotations.initMocks(this);  }//初始化Mock对象
-    @Test
-    public void getAppSecretByAppKey3() throws Exception {
-        when(userAppMapper.getAppSecretByAppKey(anyString())).thenAnswer(
-                (InvocationOnMock invocationOnMock) -&gt; {
-                    String arg = (String) invocationOnMock.getArguments()[0];
-                    if (null == arg || arg.equals(null)) {
-                        return null;
-                    } else if (arg.equals(&quot;q1w2e3r4t5y6u7i8o9p0&quot;)) {
-                        UserApp app = new UserApp();
-                        app.setAppKey(&quot;q1w2e3r4t5y6u7i8o9p0&quot;);
-                        app.setAppSecret(&quot;q1w2e3r4t5y6u7i8o9p0&quot;);
-                        return app;
-                    } else {
-                        return null;
-                    }
-
-                });
-        assertEquals(userAppService.getAppSecretByAppKey(&quot;q1w2e3r4t5y6u7i8o9p0&quot;), &quot;q1w2e3r4t5y6u7i8o9p0&quot;);
-        assertEquals(userAppService.getAppSecretByAppKey(&quot;123456789&quot;), null);
-        assertEquals(userAppService.getAppSecretByAppKey(null), null);
-        verify(userAppMapper, only()).getAppSecretByAppKey(anyString());
-    }
-// 注意：verify记录着这个模拟对象调用了什么方法，调用了多少次，never() 没有被调用，相当于 times(0)，atLeast(N) 至少被调用 N 次，atLeastOnce() 相当于 atLeast(1)，atMost(N) 最多被调用 N 次
-// 参数匹配也可以为：verify(mock).someMethod(anyInt(), anyString()); </code></pre>
-<h2 id="四、PowerMock的使用"><a href="#四、PowerMock的使用" class="headerlink" title="四、PowerMock的使用"></a>四、PowerMock的使用</h2><p>PowerMock基于Mockito开发，起语法规则与Mockito一致，主要区别在于使用方面，以实现完成对<strong>private/static/fina</strong>l等方法(也支持mock的对象是在方法内部new出来的)的Mock（模拟）。具体事例如下：</p>
-<p><strong>依赖</strong></p>
-<pre><code class="xml">&lt;dependency&gt;
-   &lt;groupId&gt;org.powermock&lt;/groupId&gt;
-   &lt;artifactId&gt;powermock-module-junit4&lt;/artifactId&gt;
-   &lt;version&gt;${powermock.version}&lt;/version&gt;
-   &lt;scope&gt;test&lt;/scope&gt;
-   &lt;exclusions&gt;
-      &lt;exclusion&gt;
-         &lt;artifactId&gt;objenesis&lt;/artifactId&gt;
-         &lt;groupId&gt;org.objenesis&lt;/groupId&gt;
-      &lt;/exclusion&gt;
-   &lt;/exclusions&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-   &lt;groupId&gt;org.powermock&lt;/groupId&gt;
-   &lt;artifactId&gt;powermock-api-mockito&lt;/artifactId&gt;
-   &lt;version&gt;${powermock.version}&lt;/version&gt;
-   &lt;scope&gt;test&lt;/scope&gt;
-&lt;/dependency&gt;</code></pre>
-<pre><code class="html">//2、 PowerMock有两个重要的注解：
-      –@RunWith(PowerMockRunner.class)
-      –@PrepareForTest( { YourClassWithEgStaticMethod.class })
-     // 如果你的测试用例里没有使用注解@PrepareForTest，那么可以不用加注解@RunWith(PowerMockRunner.class)，反之亦然。当你需要使用PowerMock强大功能（Mock静态、final、私有方法等）的时候，就需要加注解@PrepareForTest。
-</code></pre>
-<pre><code class="java">//测试类
-public class ClassUnderTest {  
-    public boolean callArgumentInstance(File file) {  
-        return file.exists();  
-    }   
-    public boolean callFinalMethod(ClassDependency refer) {  
-        return refer.isAlive();  
-    }  
-    public boolean callStaticMethod() {  
-        return ClassDependency.isExist();  
-    }  
-    public boolean callPrivateMethod() {  
-       return ClassDependency.delete(); 
-    }  
-}  
-//依赖类
-public class ClassDependency {  
-    public static boolean isExist() {   
-        return false;  
-    }  
-    public final boolean isAlive() {  
-        return false;  
-    }  
-    priavte final boolean delete() {  
-        return false;  
-    }  
-}   </code></pre>
-<pre><code class="java">// 2、Mock方法内部new出来的对象
-public void testCallInternalInstance() throws Exception {  
-    File file = PowerMockito.mock(File.class);  
-    ClassUnderTest underTest = new ClassUnderTest();  
-    PowerMockito.whenNew(File.class).withArguments(&quot;bbb&quot;).thenReturn(file);  
-    PowerMockito.when(underTest.callArgumentInstance( new File(&quot;bbb&quot;))).thenReturn(true);  
-    PowerMockito.when(file.exists()).thenReturn(true); 
-    Assert.assertTrue(file.exists(); 
-}   </code></pre>
-<pre><code class="java">// 3、Mock普通对象的final方法
-public void testCallFinalMethod() {  
-    ClassDependency depencency = PowerMockito.mock(ClassDependency.class);  
-    ClassUnderTest underTest = new ClassUnderTest();  
-    PowerMockito.when(depencency.isAlive()).thenReturn(true);  
-    Assert.assertTrue(underTest.callFinalMethod(depencency)); 
-}  </code></pre>
-<pre><code class="java">// 4、Mock静态方法
-public void testCallStaticMethod() {  
-    ClassUnderTest underTest = new ClassUnderTest();  
-    PowerMockito.mockStatic(ClassDependency.class);  
-    PowerMockito.when(ClassDependency.isExist()).thenReturn(true);  
-    Assert.assertTrue(underTest.callStaticMethod());  
-}</code></pre>
-<pre><code class="java">// 5、Mock私有方法
-public void testCallPrivateMethod() throws Exception {  
-    ClassUnderTest underTest = PowerMockito.mock(ClassUnderTest.class);  
-    PowerMockito.when(underTest,&quot;callPrivateMethod&quot;).thenCallRealMethod(); 
-    Assert.assertTrue(underTest.callPrivateMethod());  
- }</code></pre>
-<hr>
-
-      
-    </div>
-    
-    <footer>
-        <div class="alignright">
-          
-          <a href='javascript:void(0)' class="share-link bdsharebuttonbox" data-cmd="more">分享</a>
+            
+                <div>
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2019-08-19
+                    &nbsp;&nbsp;
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-inbox"></i>
+                        
+                            <a href="/categories/java">java</a>
+                            &nbsp;&nbsp;
+                        
+                    
+                    
+                        |&nbsp;&nbsp;<i class="iconfont icon-tag"></i>
+                        
+                            <a href="/tags/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95">单元测试</a>&nbsp;
+                        
+                            <a href="/tags/java">java</a>&nbsp;
+                        
+                    
+                </div>
+            
         </div>
-        
-  
-  <div class="categories">
-    <a href="/categories/java/">java</a>
-  </div>
-
-        
-  
-  <div class="tags">
-    <a href="/tags/java/">java</a>, <a href="/tags/单元测试/">单元测试</a>
-  </div>
-
-        <!-- partial('post/share') -->
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2019-08-19T01:36:36.653Z"><a href="/2019/08/19/深入浅析内存/">2019-08-19</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2019/08/19/深入浅析内存/">深入浅析内存</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="深入浅析内存"><a href="#深入浅析内存" class="headerlink" title="深入浅析内存"></a>深入浅析内存</h1><p>除了CPU，内存大概是最重要的计算资源了。基本称为分布式系统标配的缓存中间件、高性能的数据处理系统及当前流行的大数据平台，都离不开对计算机内存的深入理解与巧妙使用。</p>
-<h2 id="你所不知道的内存知识"><a href="#你所不知道的内存知识" class="headerlink" title="你所不知道的内存知识"></a>你所不知道的内存知识</h2><h3 id="复杂的CPU与单纯的内存"><a href="#复杂的CPU与单纯的内存" class="headerlink" title="复杂的CPU与单纯的内存"></a>复杂的CPU与单纯的内存</h3><p>首先，我们澄清几个容易让人混淆的CPU术语。</p>
-<blockquote>
-<ul>
-<li>Socket或者Processor：指一个屋里CPU芯片，盒装的或者散装的，上面有很多针脚，直接安装在主板上。</li>
-<li>Core：指Socket里封装的一个CPU核心，每个Core都是完全独立的计算单元，我们平时说的4核CPU，就是指一个Socket(Processor)里封装了4个Core。</li>
-<li>HT超线程：目前Intel与AMD的Processor大多支持在一个Core里并行执行两个线程，此时在操作系统看来就相当于两个逻辑CPU(Logical Processor),在大多数情况下，我们在程序里提到CPU这个概念时，就是指一个Logical Processor。</li>
-</ul>
-</blockquote>
-<p>&nbsp; &nbsp; 然后，我们先从第一个非常简单的问题开始：CPU可以直接操作内存吗？可能99%的程序员会不假思索的回答：「肯定的，不然程序怎么跑。」如果理性地分析一下，你会发现这个回答有问题：CPU与内存条是独立的两个硬件，而且CPU上也没有插槽和连线可以让内存条挂上去，也就是说，CPU并不能直接访问内存条，而是要通过主办上的其他硬件(接口)来间接访问内存条。</p>
-<p>&nbsp; &nbsp;第二个问题：CPU的运算速度与内存条的访问速度在回见的差距究竟有多大？这个差距跟王健林「先挣它个一个亿的」小目标和「普通人有车有房」的宏大目标之间的差距相比，是更大还是更小呢？答案是：「差不多」。通常来说，CPU的运算速度与内存访问速度之间的差距不过是100倍，假如有100万RMB就可以有有房(贷)有车(贷)了没那么其100倍就刚好是一亿RMB。</p>
-<p>&nbsp; &nbsp;既然CPU的速度与内存的速度还是存在高度两个数量级的巨大鸿沟，所有它们注定不能「幸福地在一起」，于是CPU的亲密伴侣Cache闪亮登场。与来自DRAM家族的内存(Memory)出身不同，Cache来自ASRAM家族。DRAM与SRAM最简单的区别是后者特别快，容量特别小，电路结构非常复杂，造假特别高。</p>
-<p>&nbsp; &nbsp;造成Cache与内存之间巨大性能差距的主要原因是工作原理和结构不同，如下所述。</p>
-<blockquote>
-<ul>
-<li>DRAM存储一个数据只需要一个电容加一个晶体管，SRAM则需要6个晶体管。由于DRAM的数据其实是保存在电容里的，所以每次读写过程中的充放电环节也导致了DRAM读写数据有一个延迟的问题，这个延迟通常为十几到几十ns。</li>
-<li>内存可以看做一个二维数据，每个存储单元都有其行地址和列地址。<br>由于SRAM的容量很小，所以存储单元的地址(行与列)比较短，可以一次性传输到SRAM中；而DRAM则需要分别传送行与列的地址。</li>
-<li>SRAM的频率基本与CPU的频率保持一致；而DRAM的频率知道DDR4以后才开始接近CPU的频率。</li>
-</ul>
-</blockquote>
-<p>&nbsp; &nbsp;Cache是被集成到CPU内部的一个存储单元，一级Cache(L1 Cache)通常只有32~64KB的容量，这个容量远远不能满足CPU大量、告诉存取的需求。此外，由于存储性能的答复提升往往伴随着价格的同步飙升，所以出于对整体成本的控制，现实中往往采用金字塔形的多级Cache体系来实现最佳缓存效果，于是出现了二级Cache(L2 Cache)及三级Cache(L3 Cache)，每一级Cache都牺牲了部分性能指标来换取更大的容量，目的是缓存更多的热点数据。以Intel家族 Intel Sandy Bridge架构的CPU为例，其L1 Cache容量为64KB，访问速度为1ns左右；L2 Cache容量扩大4倍，达到256KB，访问速度则降低到3ns左右；L3 Cache的容量则扩大512倍，达到32MB，访问速度也下降到12ns左右，即使如此，也比访问驻村的100ns(40ns+65ns)快一个数量级。此外，L3 Cache是被一个Socket上的所有CPU Core共享的，其实最早的L3 Cache被应用在AMD发布的K6-III处理器上，当时的L3 Cache受限于制造工艺，并没有被集成到CPU内部，而是集成到主板上。</p>
-<p>&nbsp; &nbsp;从Intel Sandy Bridge CPU架构图中可以看出，CPU如果要访问内存中的数据，则要经过L1、L2、L3这三道关卡后才能抵达目的地，这个过程并不是「皇上」(CPU)亲自出马，而是交由3个级别的贵妃(Cache)们层层转发「圣旨」(内部指令)，最红抵达「后宫」(内存).</p>
-<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1565571049876.png" alt="1565571049876"></p>
-<hr>
-<h3 id="多核CPU与内存共享的问题"><a href="#多核CPU与内存共享的问题" class="headerlink" title="多核CPU与内存共享的问题"></a>多核CPU与内存共享的问题</h3><p>&nbsp; &nbsp;在多核CPU的情况下，如何共享内存？</p>
-<p>&nbsp; &nbsp;如果擅长多线程高级编程，那么肯定会毫不犹豫地给出以下伪代码：</p>
-<pre><code class="java">synchronized(memory){
-    doSomething(...);
-}</code></pre>
-<p>&nbsp; &nbsp;如果真这个简单，那么这个世界上就不会只剩下两家独大的主流CPU制造商了，而且可怜的AMD一直被Intel「吊打」。</p>
-<p>&nbsp; &nbsp;多核CPU共享内存的问题也被称为Cache一致性问题，简单地说，就是多个CPU核心所看到的Cache数据应该是一直的，在某个数据被某个CPU写入自己的Cache(L1 Cache)以后，其他CPU都应该能看到相同的Cache数据；如果自己的Cache中有旧数据，则抛弃旧数据。考虑到每个CPU有自己内存独占的Cache，所以这个问题与分布式Cache保持同步的问题是同一类问题。来自Intel的MESI协议是目前业界公认的Cache一致性问题的最佳方案，大多数SMP架构都采用这一方案，虽然该协议是一个CPU内部的协议，但由于它对我们理解内存模型及解决分布式系统的数据一致性问题有重要的参考价值，所以在这对其进行简单介绍。</p>
-<p>&nbsp; &nbsp;Cache Line，如果有印象的话，则你会发现I/O操作从来不以字节为单位，而是以「块」为单位，这里有两个原因：首先，因为I/O操作比较慢，所以读一个字节与一个读连续N个字节所花费的时间基本相同；其次，数据访问往往具有空间连续性地特征，即我们通常会访问空间上连续的一些数据。举个例子，访问数组时通常会循环遍历，比如查找某个值或者进行比较等，如果把数组中连续的几个字节都读到内存中，那么CPU的处理速度会提升几倍。对于CPU来说，由于Memory也是慢速的外部组件，所以针对Memory的读写也采用类似I/O块的方式就不足为奇了。实际上，CPU Cache里的最小存储单元就是Cache Line，Intel CPU的一个Cache Line存储64个字节，每一级Cache都被划分为很多组Cache Line，典型的情况是4条Cache Line为一组，当Cache从Memory中加载数据时，一次加载一条Cache Line的数据。下图是Cache的结构。</p>
-<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1565572262318.png" alt="1565572262318"></p>
-<p>&nbsp; &nbsp;每个Cache Line的头部有两个Bit来表示自身的状态，总共4种状态。</p>
-<blockquote>
-<ul>
-<li>M（Modified）：修改状态，其他CPU上没有数据的副本，并且在本CPU上被修改过，与存储器中的数据不一致，最终必然会引发系统总线的写指令，将Cache Line的数据写回到Memory中。</li>
-<li>E(Exclusive)：独占状态，表示当前Cache Line中包含的数据与Memory中的数据一致，此外，其他CPU中没有数据的副本。</li>
-<li>S（Shared）：共享状态，表示Cache Line中包含的数据与Memory中的数据一致，而且在当前CPU和至少在其他某个CPU中有副本。</li>
-<li>I(Invalid)：无效状态，当前Cache Line中没有有效数据或该Cache Line的数据已经失效，不能再用，当Cache要加载新数据时，优先选择此状态的Cache Line，此外，Cache Line的初始状态也是I状态。</li>
-</ul>
-</blockquote>
-<p>&nbsp; &nbsp;MESI协议是用Cache Line的上述4种状态命名的，对Cache的读写操作引发了Cache Line的状态变化，因而可以理解为一种状态机模型。但MESI的复杂和独特之处在于状态的两种视角：一种是当前读写操作(Local Read/Write)所在CPU看到的自身的Cache Line状态及其他CPU上对应的Cache Line状态；另一种是一个CPU上的Cache Line状态的变迁会导致其他CPU上对应的Cache Line的状态变迁。如下所示为MESI协议的状态图。</p>
-<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1565573021589.png" alt="1565573021589"></p>
-<p>&nbsp; &nbsp;结合状态图，我们深入分析MESI协议的一些实现细节。</p>
-<p>&nbsp; &nbsp;（1）某个CPU(CPU A)发起本地读请求(Local Read)，比如读取某个内存地址的变量，如果此时所有的CPU的Cache中都没有加载此内存地址，即此内存地址对应的Cache Line为无效状态(Invalid)，则CPU A中的Cache会发起一个到Memory的内存Load指令，在相应的Cache Line中完成内存加载后，此Cache Line的状态会被标记位Exclusive。接下来，如果其他CPU(CPU B)在总线上也发起对同一个内存地址的读请求，则这个读请求会被CPU A 嗅探到(SNOOP),然后CPU A在内存总线上复制一份Cache Line作为应答，并将自身的Cache Line状态改为Shared，同时CPU B收到来自总线的应答并保存到自己的Cache里，也修改对应的Cache Line 状态为Shared。</p>
-<p>&nbsp; &nbsp;(2)某个CPU(CPU A)发起本地写请求(Loacl Write),比如对某个内存地址的变量赋值，如果此时多有的CPU的Cache中都没加载此内存地址，即此内存对应的Cache Line为无效状态(Invalid)，则CPU A 中的Cache Line保存了最新的内存变量值后，其祖航太修改为Modified。随后，如果CPU B发起对同一个变量的读操作(Remote Read)，则CPU A在总线嗅探到这个读请求以后，先将Cache Line里修改过的数据回写(Write Back)到Memory中，然后在内存总线上复制一份Cache Line作为应答，最后将自身的Cache Line状态修改为Shared，由此产生的结果是CPU A与CPU B里对应的Cache Line状态都为Shared。</p>
-<p>&nbsp; &nbsp;(3)以上面第二条内容为基础，CPU A发起本地写请求并导致自身的Cache Line状态变为Modified，如果此时CPU B 发起同一个内存地址的写请求(Remote Write)，则我们看到的状态图里此时CPU A 的Cache Line状态为Invalid 其原因如下。</p>
-<p>&nbsp; &nbsp;CPU B此时发出的是一个特殊的请求——读并且打算修改数据，当CPU A从总线上嗅探到这个请求后，会先阻止此请求并取得总线的控制权( Takes Control of Bus)，随后将Cache Line里修改过的数据回写到Memory中，再将此Cache Line的状态修改为Invalid(这是因为其他CPU要改数据，所以没必要改为Shared)。与此同时，CPU B 发现之前的请求并没有得到响应，于是重新发起一次请求，此时由于所有的CPU的Cache里都没有内存副本了，所以CPU B的Cache就从Memory中加载最新的数据到Cache Line中，随后修改数据，然后改变Cache Line的状态为Modified。</p>
-<p>  &nbsp; &nbsp;(4)如果内存中的某个变量被多个CPU加载到各自的Cache中，从而使得变量对应的Cache Line状态为Shared，若此时某个CPU打算对此变量进行写操作，则会导致所有拥有此变量缓存的CPU的Cache Line状态都变为Invalid，这是引发性能下降的一个典型Cache Miss 问题。</p>
-<p>  &nbsp; &nbsp;在理解了MESI协议以后，我们明白了一个重要的事实，即存在多个处理器时，对共享变量的修改操作会设计多个CPU之间协调问题及Cache失效问题，这就引发了著名的「Cache伪共享」问题。</p>
-<p>   &nbsp; &nbsp;如果要访问的数据不在CPU的运算单元里，则需要从缓存中加载，如果缓存中恰好有此数据而且数据有效，就命中一次(Cache Hit)，反之产生一次Cache Miss ，此时需要从下一级缓存或主存中再次尝试加载。根据之前的分析，如果发生了Cache Miss，则数据的访问性能瞬间下降很多！在我们需要大量加载运算的情况下，数据结构、访问方式及程序运算方面是否符合「缓存友好」的设计，就成为「量变引起质变」得关键性因素了。这也是为什么最近，国外很多大数据领域的专家都热衷于研究设计和采用新一代的数据结构和算法，而其核心之一就是「缓存友好」。</p>
-<hr>
-<h3 id="著名的Cache伪共享问题"><a href="#著名的Cache伪共享问题" class="headerlink" title="著名的Cache伪共享问题"></a>著名的Cache伪共享问题</h3>
-      
     </div>
-    
-    <footer>
-        <div class="alignright">
-          
-          <a href='javascript:void(0)' class="share-link bdsharebuttonbox" data-cmd="more">分享</a>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+    
+</main>
+
+<footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/0x2e/Material-T" target="_blank" rel="nofollow noopener"> <b>Material-T</b></a>
+    <br>
+    
+  </div>
+</footer>
+
+  <!-- SCRIPTS -->
+  <script src="/lib/mdbootstrap/js/jquery-3.4.1.min.js"></script>
+  <script src="/lib/mdbootstrap/js/popper.min.js"></script>
+  <script src="/lib/mdbootstrap/js/bootstrap.min.js?v=4.3.1"></script>
+  <script src="/lib/mdbootstrap/js/mdb.min.js?v=4.8.7"></script>
+  <script src="/lib/nprogress/nprogress.min.js?v=0.2.0"></script>
+  <script src="/js/main.js"></script>
+  
+  
+    <script src="/lib/prettify/prettify.min.js?v=0.1.0"></script>
+    <script>
+      $(document).ready(function(){
+        $('pre').addClass('prettyprint linenums');
+        prettyPrint();
+      })
+    </script>
+  
+  
+    <script src="/lib/typed/typed.min.js?v=2.0.9"></script>
+    <script>
+        var typed = new Typed('#subtitle', {
+          strings: [
+            '  ',
+            "&nbsp;",
+        ],
+        cursorChar: "_",
+        typeSpeed: 70,
+        startDelay: 300, //开始之前延迟300毫秒
+        loop: false,
+        });
+        $(".typed-cursor").addClass("h2");
+    </script>
+  
+  
+    <script src="/lib/anchor/anchor.min.js?v=4.2.0"></script>
+    <script>
+      anchors.options = {
+        placement: "right",
+        visible: "false",
         
+      };
+      anchors.add(".post-content > h1,h2,h3,h4,h5,h6");
+    </script>
   
-  <div class="categories">
-    <a href="/categories/java/">java</a>
-  </div>
-
-        
-  
-  <div class="tags">
-    <a href="/tags/内存/">内存</a>, <a href="/tags/java/">java</a>
-  </div>
-
-        <!-- partial('post/share') -->
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-
-
-<nav id="pagination">
-  
-</nav>
-</div></div>
-    <aside id="sidebar" class="alignright">
-  <div class="search">
-  <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="Search">
-    <input type="hidden" name="q" value="site:yoursite.com">
-  </form>
-</div>
-
-  
-<div class="widget tag">
-  <h3 class="title">Categories</h3>
-  <ul class="entry">
-  
-    <li><a href="/categories/Spring-Cloud/">Spring Cloud</a><small>1</small></li>
-  
-    <li><a href="/categories/java/">java</a><small>2</small></li>
-  
-    <li><a href="/categories/sonarQube/">sonarQube</a><small>1</small></li>
-  
-    <li><a href="/categories/文件系统/">文件系统</a><small>1</small></li>
-  
-  </ul>
-</div>
-
-
-  
-<div class="widget tag">
-  <h3 class="title">Recent Posts</h3>
-  <ul class="entry">
-    
-      <li>
-        <a href="/2019/08/19/Spring Cloud学习/">Spring Cloud</a>
-      </li>
-    
-      <li>
-        <a href="/2019/08/19/sonarqubSonar/">sonarQube</a>
-      </li>
-    
-      <li>
-        <a href="/2019/08/19/SeaweedFS/">SeaweedFS</a>
-      </li>
-    
-      <li>
-        <a href="/2019/08/19/powermock/">Mockito和PowerMock用法</a>
-      </li>
-    
-      <li>
-        <a href="/2019/08/19/深入浅析内存/">深入浅析内存</a>
-      </li>
-    
-  </ul>
-</div>
-
-
-  
-<div class="widget tag">
-  <h3 class="title">Tags</h3>
-  <ul class="entry">
-  
-    <li><a href="/tags/SeaweedFS/">SeaweedFS</a><small>1</small></li>
-  
-    <li><a href="/tags/Spring-Cloud/">Spring Cloud</a><small>1</small></li>
-  
-    <li><a href="/tags/java/">java</a><small>3</small></li>
-  
-    <li><a href="/tags/sonarQube/">sonarQube</a><small>1</small></li>
-  
-    <li><a href="/tags/内存/">内存</a><small>1</small></li>
-  
-    <li><a href="/tags/分布式文件系统/">分布式文件系统</a><small>1</small></li>
-  
-    <li><a href="/tags/单元测试/">单元测试</a><small>1</small></li>
-  
-    <li><a href="/tags/微服务/">微服务</a><small>1</small></li>
-  
-  </ul>
-</div>
-
-
-  
-<div class="widget tagcloud">
-  <h3 class="title">Tag Cloud</h3>
-  <div class="entry">
-    <a href="/tags/SeaweedFS/" style="font-size: 10px;">SeaweedFS</a> <a href="/tags/Spring-Cloud/" style="font-size: 10px;">Spring Cloud</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/sonarQube/" style="font-size: 10px;">sonarQube</a> <a href="/tags/内存/" style="font-size: 10px;">内存</a> <a href="/tags/分布式文件系统/" style="font-size: 10px;">分布式文件系统</a> <a href="/tags/单元测试/" style="font-size: 10px;">单元测试</a> <a href="/tags/微服务/" style="font-size: 10px;">微服务</a>
-  </div>
-</div>
-
-</aside>
-    <div class="clearfix"></div>
-  </div>
-  <footer id="footer" class="inner"><div class="alignleft">
-  <p>
-  
-  &copy; 2019 俞超超
-  
-  All rights reserved.</p>
-  <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
-</div>
-<div class="clearfix"></div>
-
-<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></footer>
-  <script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
-
-
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-(function($){
-  $('.fancybox').fancybox();
-})(jQuery);
-</script>
-
-
-<div id='bg'></div>
 </body>
 </html>

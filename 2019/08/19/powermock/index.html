@@ -1,83 +1,106 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
 <head><meta name="generator" content="Hexo 3.9.0">
-  <meta charset="utf-8">
-  
-  <title>Mockito和PowerMock用法 | MysticalYcc</title>
-  <meta name="author" content="俞超超">
+    <meta charset="UTF-8">
+    <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content>
+    <meta name="author" content="俞超超">
+    <meta name="keywords" content>
+    <title>Mockito和PowerMock用法 ~ MysticalYcc</title>
+    <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css?v=5.7.2">
+    <link rel="stylesheet" href="/lib/mdbootstrap/css/bootstrap.min.css?v=4.3.1">
+    <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css?v=4.8.7">
+    <link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css">
+    <link rel="stylesheet" href="/lib/nprogress/nprogress.css?v=0.2.0">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+    
+        <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+    
+    <link rel="stylesheet" href="/css/main.css">
 
-  
-  <meta name="description" content="Mockito和PowerMock用法
-[TOC]
-
-一、mock测试和Mock对象mock对象就是在调试期间用来作为真实对象的替代品mock测试就是在测试过程中，对那些不容易构建的对象用一个虚拟对象来代替测试的方法就叫mock测试
-二、Mockito和PowerMock  PowerMock是Ja">
-  
-
-  
-
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-  <meta property="og:title" content="Mockito和PowerMock用法">
-  <meta property="og:site_name" content="MysticalYcc">
-
-  
-  
-
-  
-    <meta property="og:image" content>
-  
-
-  
-  <link href="/css/images/favicon.ico" rel="icon">
-  
-
-  <link rel="alternate" href="/atom.xml" title="MysticalYcc" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-  
-
-
-  <!-- baidu webmaster push -->
-  <script src="//push.zhanzhang.baidu.com/push.js"></script>
-
+    
 </head>
-</html>
+
 
 <body>
-  <header id="header" class="inner"><div class="alignleft">
-  <h1><a href="/">MysticalYcc</a></h1>
-  <h2><a href="/"></a></h2>
-</div>
-<nav id="main-nav" class="alignright">
-  <ul>
-    
-      <li><a href="/">Home</a></li>
-    
-      <li><a href="/archives">Archives</a></li>
-    
-  </ul>
-  <div class="clearfix"></div>
-</nav>
-<div class="clearfix"></div></header>
-  <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2019-08-19T10:00:12.980Z"><a href="/2019/08/19/powermock/">2019-08-19</a></time>
-      
-      
-  
-    <h1 class="title">Mockito和PowerMock用法</h1>
-  
+<header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+<div class="container">
+    <a class="navbar-brand" href="/">&nbsp;<strong>MysticalYcc</strong>&nbsp;</a>
 
-    </header>
-    <div class="entry">
-      
-        <h1 id="Mockito和PowerMock用法"><a href="#Mockito和PowerMock用法" class="headerlink" title="Mockito和PowerMock用法"></a>Mockito和PowerMock用法</h1><hr>
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto text-center">
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/archives/">Archives</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/categories/">Categories</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/tags/">Tags</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/about/">About</a>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+</nav>
+    <div class="view intro-2"
+         style="background: url('/img/post.jpg')no-repeat center center;background-size: cover;">
+        <div class="full-bg-img">
+            <div class="mask rgba-black-light flex-center">
+                <div class="container text-center white-text wow fadeInUp">
+                    <span class="h2" id="subtitle">
+                        
+                    </span>
+                    
+                        <br>
+                        <p>Monday, August 19th 2019, 6:00 pm</p>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    
+        
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="d-none d-lg-block col-lg-2"></div>
+            <div class="col-lg-8 nopadding-md">
+                <div class="py-5 z-depth-3 board">
+                    <div class="post-content mx-auto">
+                        <div class="markdown-body">
+                            <h1 id="Mockito和PowerMock用法"><a href="#Mockito和PowerMock用法" class="headerlink" title="Mockito和PowerMock用法"></a>Mockito和PowerMock用法</h1><hr>
 <p>[TOC]</p>
 <hr>
 <h2 id="一、mock测试和Mock对象"><a href="#一、mock测试和Mock对象" class="headerlink" title="一、mock测试和Mock对象"></a>一、mock测试和Mock对象</h2><p>mock对象就是在调试期间用来作为真实对象的替代品<br>mock测试就是在测试过程中，对那些不容易构建的对象用一个虚拟对象来代替测试的方法就叫mock测试</p>
@@ -284,149 +307,115 @@ public void testCallPrivateMethod() throws Exception {
  }</code></pre>
 <hr>
 
-      
-    </div>
-    
-    <footer>
-        <div class="alignright">
-          
-          <a href='javascript:void(0)' class="share-link bdsharebuttonbox" data-cmd="more">分享</a>
+                            <hr>
+                        </div>
+                        <br>
+                        <div>
+                            
+                                <p>
+                                    <i class="iconfont icon-inbox"></i>
+                                    
+                                        <a class="hover-with-bg" href="/categories/java">java</a>
+                                        &nbsp;
+                                    
+                                </p>
+                            
+                            <p>
+                                <i class="iconfont icon-tag"></i>
+                                
+                                    <a class="hover-with-bg" href="/tags/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95">单元测试</a>
+                                
+                                    <a class="hover-with-bg" href="/tags/java">java</a>
+                                
+                            </p>
+                            
+                                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="d-none d-lg-block col-lg-2 toc-container">
+            
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i> Toc:</p> 
+    <div id="tocbot"></div>
+  </div>
+
         </div>
+    </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+    <div class="container comments mx-auto" id="comments">
         
-  
-  <div class="categories">
-    <a href="/categories/java/">java</a>
-  </div>
+    </div>
+</div>
+    
+</main>
 
+<footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/0x2e/Material-T" target="_blank" rel="nofollow noopener"> <b>Material-T</b></a>
+    <br>
+    
+  </div>
+</footer>
+
+  <!-- SCRIPTS -->
+  <script src="/lib/mdbootstrap/js/jquery-3.4.1.min.js"></script>
+  <script src="/lib/mdbootstrap/js/popper.min.js"></script>
+  <script src="/lib/mdbootstrap/js/bootstrap.min.js?v=4.3.1"></script>
+  <script src="/lib/mdbootstrap/js/mdb.min.js?v=4.8.7"></script>
+  <script src="/lib/nprogress/nprogress.min.js?v=0.2.0"></script>
+  <script src="/js/main.js"></script>
+  
+    
+      <script src="/lib/tocbot/tocbot.min.js?v=4.7.0"></script>
+    
+    <script src="/js/post.js"></script>
+  
+  
+    <script src="/lib/prettify/prettify.min.js?v=0.1.0"></script>
+    <script>
+      $(document).ready(function(){
+        $('pre').addClass('prettyprint linenums');
+        prettyPrint();
+      })
+    </script>
+  
+  
+    <script src="/lib/typed/typed.min.js?v=2.0.9"></script>
+    <script>
+        var typed = new Typed('#subtitle', {
+          strings: [
+            '  ',
+            "Mockito和PowerMock用法&nbsp;",
+        ],
+        cursorChar: "_",
+        typeSpeed: 70,
+        startDelay: 300, //开始之前延迟300毫秒
+        loop: false,
+        });
+        $(".typed-cursor").addClass("h2");
+    </script>
+  
+  
+    <script src="/lib/anchor/anchor.min.js?v=4.2.0"></script>
+    <script>
+      anchors.options = {
+        placement: "right",
+        visible: "false",
         
+      };
+      anchors.add(".post-content > h1,h2,h3,h4,h5,h6");
+    </script>
   
-  <div class="tags">
-    <a href="/tags/java/">java</a>, <a href="/tags/单元测试/">单元测试</a>
-  </div>
-
-        <!-- partial('post/share') -->
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-</div></div>
-    <aside id="sidebar" class="alignright">
-  <div class="search">
-  <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="Search">
-    <input type="hidden" name="q" value="site:yoursite.com">
-  </form>
-</div>
-
-  
-<div class="widget tag">
-  <h3 class="title">Categories</h3>
-  <ul class="entry">
-  
-    <li><a href="/categories/Spring-Cloud/">Spring Cloud</a><small>1</small></li>
-  
-    <li><a href="/categories/java/">java</a><small>2</small></li>
-  
-    <li><a href="/categories/sonarQube/">sonarQube</a><small>1</small></li>
-  
-    <li><a href="/categories/文件系统/">文件系统</a><small>1</small></li>
-  
-  </ul>
-</div>
-
-
-  
-<div class="widget tag">
-  <h3 class="title">Recent Posts</h3>
-  <ul class="entry">
-    
-      <li>
-        <a href="/2019/08/19/Spring Cloud学习/">Spring Cloud</a>
-      </li>
-    
-      <li>
-        <a href="/2019/08/19/sonarqubSonar/">sonarQube</a>
-      </li>
-    
-      <li>
-        <a href="/2019/08/19/SeaweedFS/">SeaweedFS</a>
-      </li>
-    
-      <li>
-        <a href="/2019/08/19/powermock/">Mockito和PowerMock用法</a>
-      </li>
-    
-      <li>
-        <a href="/2019/08/19/深入浅析内存/">深入浅析内存</a>
-      </li>
-    
-  </ul>
-</div>
-
-
-  
-<div class="widget tag">
-  <h3 class="title">Tags</h3>
-  <ul class="entry">
-  
-    <li><a href="/tags/SeaweedFS/">SeaweedFS</a><small>1</small></li>
-  
-    <li><a href="/tags/Spring-Cloud/">Spring Cloud</a><small>1</small></li>
-  
-    <li><a href="/tags/java/">java</a><small>3</small></li>
-  
-    <li><a href="/tags/sonarQube/">sonarQube</a><small>1</small></li>
-  
-    <li><a href="/tags/内存/">内存</a><small>1</small></li>
-  
-    <li><a href="/tags/分布式文件系统/">分布式文件系统</a><small>1</small></li>
-  
-    <li><a href="/tags/单元测试/">单元测试</a><small>1</small></li>
-  
-    <li><a href="/tags/微服务/">微服务</a><small>1</small></li>
-  
-  </ul>
-</div>
-
-
-  
-<div class="widget tagcloud">
-  <h3 class="title">Tag Cloud</h3>
-  <div class="entry">
-    <a href="/tags/SeaweedFS/" style="font-size: 10px;">SeaweedFS</a> <a href="/tags/Spring-Cloud/" style="font-size: 10px;">Spring Cloud</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/sonarQube/" style="font-size: 10px;">sonarQube</a> <a href="/tags/内存/" style="font-size: 10px;">内存</a> <a href="/tags/分布式文件系统/" style="font-size: 10px;">分布式文件系统</a> <a href="/tags/单元测试/" style="font-size: 10px;">单元测试</a> <a href="/tags/微服务/" style="font-size: 10px;">微服务</a>
-  </div>
-</div>
-
-</aside>
-    <div class="clearfix"></div>
-  </div>
-  <footer id="footer" class="inner"><div class="alignleft">
-  <p>
-  
-  &copy; 2019 俞超超
-  
-  All rights reserved.</p>
-  <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
-</div>
-<div class="clearfix"></div>
-
-<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></footer>
-  <script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
-
-
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-(function($){
-  $('.fancybox').fancybox();
-})(jQuery);
-</script>
-
-
-<div id='bg'></div>
 </body>
 </html>
