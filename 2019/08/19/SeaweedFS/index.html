@@ -14,7 +14,7 @@
     <meta name="description" content>
     <meta name="author" content="John Doe">
     <meta name="keywords" content>
-    <title>Hello World ~ Hexo</title>
+    <title>Hexo</title>
     <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css?v=5.7.2">
     <link rel="stylesheet" href="/lib/mdbootstrap/css/bootstrap.min.css?v=4.3.1">
     <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css?v=4.8.7">
@@ -81,7 +81,7 @@
                     </span>
                     
                         <br>
-                        <p>Monday, August 19th 2019, 8:05 am</p>
+                        <p>Monday, August 19th 2019, 9:25 am</p>
                     
                 </div>
             </div>
@@ -100,15 +100,128 @@
                 <div class="py-5 z-depth-3 board">
                     <div class="post-content mx-auto">
                         <div class="markdown-body">
-                            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="bash">$ hexo new &quot;My New Post&quot;</code></pre>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="bash">$ hexo server</code></pre>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code class="bash">$ hexo generate</code></pre>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code class="bash">$ hexo deploy</code></pre>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+                            <h1 id="SeaweedFS"><a href="#SeaweedFS" class="headerlink" title="SeaweedFS"></a>SeaweedFS</h1><p>[TOC]</p>
+<h2 id="SeaweedFS简介"><a href="#SeaweedFS简介" class="headerlink" title="SeaweedFS简介"></a>SeaweedFS简介</h2><p>SeaweedFS是基于go语言开发的高可用文件存储系统，主要特征</p>
+<blockquote>
+<ul>
+<li>存储上亿的文件(最终受限制于硬盘大小)</li>
+<li>速度快，内存占用小</li>
+</ul>
+</blockquote>
+<br>
+
+<p>上手使用比fastDFS要简单很多，自带Rest API。</p>
+<p>SeaWeeDFS作为对象存储库来有效地处理小文件。不是管理中央主机中的所有文件元数据，中央主机只管理文件卷，它允许这些卷服务器管理文件和它们的元数据。<br>这减轻了来自中央主机的并发压力，并将文件元数据扩展到卷服务器，允许更快的文件访问（仅一个磁盘读取操作）。</p>
+<br>
+
+<p>每个文件的元数据只有40字节的磁盘存储开销。</p>
+<br>
+
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>seaweedfs是一个非常优秀的由 golang 开发的分布式存储开源项目。它是用来存储文件的系统，并且与使用的语言无关，使得文件储存在云端变得非常方便。</p>
+<p>在逻辑上Seaweedfs的几个概念：</p>
+<blockquote>
+<ul>
+<li><p>Node 系统抽象的节点，抽象为DataCenter、Rack、DataNode</p>
+</li>
+<li><p>DataCenter 数据中心，对应现实中的不同机房</p>
+</li>
+<li><p>Rack 机架，对应现实中的机柜</p>
+</li>
+<li><p>Datanode 存储节点，用于管理、存储逻辑卷</p>
+</li>
+<li><p>Volume 逻辑卷，存储的逻辑结构，逻辑卷下存储Needle</p>
+</li>
+<li><p>Needle 逻辑卷中的Object，对应存储的文件</p>
+</li>
+<li><p>Collection 文件集，可以分布在多个逻辑卷上</p>
+</li>
+</ul>
+</blockquote>
+<h2 id="搭建服务"><a href="#搭建服务" class="headerlink" title="搭建服务"></a>搭建服务</h2><h3 id="安装go环境"><a href="#安装go环境" class="headerlink" title="安装go环境"></a>安装go环境</h3><blockquote>
+<ul>
+<li>查看系统位数 getconf LONG_BIT</li>
+<li>下载源码包</li>
+<li>选择对应版本</li>
+</ul>
+</blockquote>
+<pre><code>cd /usr/local
+# 下载
+wget https://golangtc.com/static/go/1.9.2/go1.9.2.linux-amd64.tar.gz
+# 将其传到其他两台机器
+# 解压
+tar -zxf go1.9.2.linux-amd64.tar.gz
+# 配置
+vim /etc/profile
+#加入
+export GOPATH=/opt/go
+export GOROOT=/usr/local/go
+export GOOS=linux
+export GOBIN=$GOROOT/bin
+export GOTOOLS=$GOROOT/pkg/tool/
+export PATH=$PATH:$GOBIN:$GOTOOLS
+
+# 使配置文件生效
+source /etc/profile
+
+# 查看
+go version</code></pre><h3 id="安装seaweedfs"><a href="#安装seaweedfs" class="headerlink" title="安装seaweedfs"></a>安装seaweedfs</h3><p>(1)下载 <a href="https://github.com/chrislusf/seaweedfs/releases/选择对应的版本" target="_blank" rel="noopener">https://github.com/chrislusf/seaweedfs/releases/选择对应的版本</a><br>(2)解压 tar -zxf linux_amd64.tar.gz<br>(3)./weed -h 查看帮助创建运行需要的目录   </p>
+<pre><code class="xml">/../data            
+ /../ vol/vol[1-3]    
+ /../logs</code></pre>
+<p>(4)配置运行master</p>
+<pre><code class="xml">./weed master -mdir=/../data -port=9333 -defaultReplication=&quot;001&quot; -ip=&quot;172.16.20.71&quot; &amp;&gt;&gt; /../logs/master.log &amp;
+</code></pre>
+<p>(5) 配置运行volume</p>
+<p>具体参数查看帮助<br>/usr/local/weed volume -h</p>
+<h2 id="Java操作SeaweedFS"><a href="#Java操作SeaweedFS" class="headerlink" title="Java操作SeaweedFS"></a>Java操作SeaweedFS</h2><p>首先导入pom依赖</p>
+<pre><code class="xml">     &lt;dependency&gt;
+            &lt;groupId&gt;net.anumbrella.seaweedfs&lt;/groupId&gt;
+            &lt;artifactId&gt;seaweedfs-java-client&lt;/artifactId&gt;
+            &lt;version&gt;0.0.2.RELEASE&lt;/version&gt;
+        &lt;/dependency&gt;</code></pre>
+<p>编写SeaweedFS配置类SeaweedFSConfig</p>
+<pre><code class="java">@Configuration
+public class SeaweedFSConfig {
+
+    @Value(&quot;${seaweedfs.host}&quot;)
+    private String host;
+    @Value(&quot;${seaweedfs.port}&quot;)
+    private int port;
+
+    @Bean
+    public FileTemplate fileTemplate() {
+        FileSource fileSource = new FileSource();
+        // SeaweedFS master服务ip地址
+        fileSource.setHost(host);
+        // SeaweedFS master服务端口
+        fileSource.setPort(port);
+        try {
+            // 启动服务
+            fileSource.startup();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return new FileTemplate(fileSource.getConnection());
+    }
+}</code></pre>
+<p>我的application.properties配置文件如下:</p>
+<pre><code class="xml">seaweedfs.host=192.168.6.224 #多个ip地址用逗号隔开
+seaweedfs.port=9333</code></pre>
+<p>上传文件的方法如下,用的是Spring的JUnit测试:</p>
+<pre><code class="java">@Autowired
+private FileTemplate template;
+
+@Test
+public void testSeaweedFS() throws IOException {
+        // 上传可以指定文件名
+        FileHandleStatus handleStatus = template.saveFileByStream(&quot;file.type&quot;, new FileInputStream(new File(&quot;filePath&quot;)));
+        // 获取文件ID,可通过这个ID获取到文件
+        String fileId = handleStatus.getFileId();
+        StreamResponse fileStream = template.getFileStream(fileId);
+        InputStream inputStream = fileStream.getInputStream();
+        // 获取流之后流拷贝输出到本地
+        IOUtils.copy(inputStream,new FileOutputStream(new File(&quot;outPath&quot;)));
+    }</code></pre>
 
                             <hr>
                         </div>
@@ -187,7 +300,7 @@
         var typed = new Typed('#subtitle', {
           strings: [
             '  ',
-            "Hello World&nbsp;",
+            "&nbsp;",
         ],
         cursorChar: "_",
         typeSpeed: 70,

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content>
+    <meta name="author" content="John Doe">
+    <meta name="keywords" content>
+    <title>Hexo</title>
+    <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css?v=5.7.2">
+    <link rel="stylesheet" href="/lib/mdbootstrap/css/bootstrap.min.css?v=4.3.1">
+    <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css?v=4.8.7">
+    <link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css">
+    <link rel="stylesheet" href="/lib/nprogress/nprogress.css?v=0.2.0">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+    
+        <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+    
+    <link rel="stylesheet" href="/css/main.css">
+
+    
+</head>
+
+
+<body>
+<header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+<div class="container">
+    <a class="navbar-brand" href="/">&nbsp;<strong>Hexo</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto text-center">
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/archives/">Archives</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/categories/">Categories</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/tags/">Tags</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/about/">About</a>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+</nav>
+    <div class="view intro-2"
+         style="background: url('/img/post.jpg')no-repeat center center;background-size: cover;">
+        <div class="full-bg-img">
+            <div class="mask rgba-black-light flex-center">
+                <div class="container text-center white-text wow fadeInUp">
+                    <span class="h2" id="subtitle">
+                        
+                    </span>
+                    
+                        <br>
+                        <p>Monday, August 19th 2019, 9:16 am</p>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    
+        
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="d-none d-lg-block col-lg-2"></div>
+            <div class="col-lg-8 nopadding-md">
+                <div class="py-5 z-depth-3 board">
+                    <div class="post-content mx-auto">
+                        <div class="markdown-body">
+                            <h1 id="sonarQube"><a href="#sonarQube" class="headerlink" title="sonarQube"></a>sonarQube</h1><hr>
+<p>[TOC]</p>
+<h2 id="Sonarqube搭建"><a href="#Sonarqube搭建" class="headerlink" title="Sonarqube搭建"></a>Sonarqube搭建</h2><h3 id="1、安装"><a href="#1、安装" class="headerlink" title="1、安装"></a>1、安装</h3><p>这里准备的是<strong><em>sonarqube7.7.zip</em></strong>，我的安装路径是/u02/ycc</p>
+<p>使用unzip解压压缩包；</p>
+<p><strong>预置条件</strong></p>
+<p>1).已安装JAVA环境</p>
+<p>2).已安装有MySQL数据库</p>
+<p>3).sonarQube压缩包</p>
+<h3 id="2、数据库配置："><a href="#2、数据库配置：" class="headerlink" title="2、数据库配置："></a>2、数据库配置：</h3><pre><code class="sql"># 创建数据库sonar
+create database sonar character set utf8 collate utf8_general_ci;
+
+# 创建数据库用户sonar可用地址为192.168.6.226密码sonar
+CREATE USER sonar@&#39;192.168.6.226&#39; identified by &#39;sonar&#39;;
+
+# 赋权给用户sonar对数据库sonar有所有权限
+grant all on sonar.* to &#39;sonar&#39;@&#39;%&#39; identified by &#39;sonar&#39;;
+
+# 授权sonar用户可以在本地连接数据库
+grant all on sonar.* to &#39;sonar&#39;@&#39;localhost&#39; identified by &#39;sonar&#39;;
+
+# 授权sonar用户可以在226连接数据库
+grant all on sonar.* to &#39;sonar&#39;@&#39;192.168.6.226&#39; identified by &#39;sonar&#39;;
+
+# 刷新权限
+flush privileges;</code></pre>
+<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564051508551.png" alt="1564051508551"></p>
+<p><strong>对权限的所有操作最后需要刷新下权限，即flush privileges;使之更改立马生效。</strong></p>
+<h3 id="3、修改sonar配置文件：sonar-properties"><a href="#3、修改sonar配置文件：sonar-properties" class="headerlink" title="3、修改sonar配置文件：sonar.properties"></a>3、修改sonar配置文件：sonar.properties</h3><p><strong>我的数据库在17，使用时更改这个地址到自己的数据库地址即可。</strong></p>
+<pre><code class="prop">sonar.jdbc.username=sonar
+sonar.jdbc.password=sonar
+sonar.jdbc.url=jdbc:mysql://192.168.6.17:3306/sonar?useUnicode=true&amp;characterEncoding=utf8&amp;rewriteBatchedStatements=true&amp;useConfigs=maxPerformance&amp;useSSL</code></pre>
+<p><strong>修改wrapper配置文件的java路径</strong></p>
+<p>wrapper配置文件额sonar.properties在同一个目录里，这里需要注意一点，路径后面需要额外加上/java。不加会报</p>
+<p>Unable to start JVM: Permission denied (13)的错误。</p>
+<pre><code class="properties">wrapper.java.command=/u02/ycc/jdk1.8.0_161/bin/java</code></pre>
+<p><strong>启动</strong></p>
+<pre><code class="pro">sh /u02/ycc/sonar.../bin/linux.../sonar.sh start</code></pre>
+<p>如果使用root的话会出现如下错误：</p>
+<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564098693803.png" alt="1564098693803"></p>
+<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564098711687.png" alt="1564098711687"></p>
+<p>换个用户，并赋予这个用户sonar目录的权限即可。</p>
+<h3 id="4、启动sonarqube"><a href="#4、启动sonarqube" class="headerlink" title="4、启动sonarqube"></a>4、启动sonarqube</h3><p>  将中文插件sonar-l10n-zh-plugin-1.28.jar复制到extensions/plugins</p>
+<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564122590906.png" alt="1564122590906"></p>
+<h3 id="5、安装SonarQube-Scanner和配置"><a href="#5、安装SonarQube-Scanner和配置" class="headerlink" title="5、安装SonarQube Scanner和配置"></a>5、安装SonarQube Scanner和配置</h3><pre><code class="html">//解压文件
+//进入文件
+//编辑文件
+[root@localhost local]#unzip  sonar-scanner-cli-3.0.3.778-linux.zip
+[root@localhost local]#mv sonar-scanner-cli-3.0.3.778-linux  sonar-scanner
+[root@localhost local]# cd sonar-scanner
+[root@localhost sonar-scanner]# vim conf/sonar-scanner.properties </code></pre>
+<pre><code class="pr">#Configure here general information about the environment, such as SonarQube DB details for example
+#No information about specific project should appear here
+#----- Default source code encoding
+sonar.sourceEncoding=UTF-8
+
+sonar.host.url=http://192.168.6.226:9000
+sonar.jdbc.username=sonar
+sonar.jdbc.password=sonar
+sonar.jdbc.url=jdbc:mysql://192.168.6.17:3306/sonar?useUnicode=true&amp;characterEncoding=utf8
+sonar.login=sonar
+sonar.password=sonar</code></pre>
+<p>在项目的根目录创建sonar-project.properties </p>
+<pre><code class="proper">#sonar登陆用户
+sonar.login=admin
+#sonar登陆密码
+sonar.password=admin
+#需要扫描的项目对应的key自定义即可
+sonar.projectKey=content-receive
+#需要扫描的项目对应的显示项目名自定义即可
+sonar.projectName=content-receive
+sonar.projectVersion=1.0-SNAPSHOT
+sonar.sourceEncoding=UTF-8
+sonar.language=java
+#扫描的源码位置
+sonar.sources=src/main/java/com/jsc/content
+#扫描的test位置
+sonar.tests=src/test/java/com/jsc/content
+#扫描java的源码位置
+sonar.java.binaries=target/classes/com/jsc/content</code></pre>
+<p>在项目当前目录执行scanner ：</p>
+<pre><code>sh /sonarscannerdir/bin/sonar-scanner -X</code></pre><p>运行结束在sonarQube页面即可看到刚才扫描的项目。</p>
+<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564109007362.png" alt="1564109007362"></p>
+<h3 id="6、maven-sonar-plugin"><a href="#6、maven-sonar-plugin" class="headerlink" title="6、maven-sonar-plugin"></a>6、maven-sonar-plugin</h3><p>对于Maven项目，除了使用SonarQube Scanner进行分析之外，还可以使用maven-sonar-plugin插件进行分析。使用maven-sonar-plugin插件的步骤如下：(setting.xml)</p>
+<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564110217662.png" alt="1564110217662"></p>
+<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564110205988.png" alt="1564110205988"></p>
+<pre><code class="xml">    &lt;profile&gt;
+        &lt;id&gt;sonar&lt;/id&gt;
+        &lt;activation&gt;
+        &lt;activeByDefault&gt;true&lt;/activeByDefault&gt;
+        &lt;/activation&gt;
+        &lt;properties&gt;
+        &lt;sonar.jdbc.url&gt;jdbc:mysql://192.168.6.226:3306/sonar&lt;/sonar.jdbc.url&gt;
+        &lt;sonar.jdbc.username&gt;sonar&lt;/sonar.jdbc.username&gt;
+        &lt;sonar.jdbc.password&gt;sonar&lt;/sonar.jdbc.password&gt;
+            &lt;sonar.host.url&gt;http://192.168.6.226:9000&lt;/sonar.host.url&gt;
+        &lt;/properties&gt;
+
+        &lt;/profile&gt; 
+  &lt;/profiles&gt;
+   &lt;activeProfiles&gt;
+        &lt;activeProfile&gt;UFindNexus&lt;/activeProfile&gt;
+        &lt;activeProfile&gt;sonar&lt;/activeProfile&gt;
+    &lt;/activeProfiles&gt;</code></pre>
+<p><strong>pom.xml</strong>的<strong>build</strong>中增加如下配置：</p>
+<pre><code class="xml"> &lt;pluginManagement&gt;
+            &lt;plugins&gt;
+                &lt;plugin&gt;
+                    &lt;groupId&gt;org.sonarsource.scanner.maven&lt;/groupId&gt;
+                    &lt;artifactId&gt;sonar-maven-plugin&lt;/artifactId&gt;
+                    &lt;version&gt;3.1.1&lt;/version&gt;
+                &lt;/plugin&gt;
+            &lt;/plugins&gt;
+        &lt;/pluginManagement&gt;</code></pre>
+<p>在对应项目的控制台输入mvn clean verify sonar:sonar<br>或mvn clean install org.sonarsource.scanner.maven:sonar-maven-plugin:3.1.1:sonar执行扫描；这里注意，如果有多个maven的setting.xml会使用环境变量配置的setting.xml。执行完即可在sonarqube页面查看。</p>
+<p>如果这里执行报错的话可以使用IDEA的run maven运行：</p>
+<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564121819350.png" alt="1564121819350"></p>
+<p>也可以在pom.xml中增加profile,此时选中sonar-project,执行 clean install sonar:sonar即可。</p>
+<pre><code class="xml">    &lt;profiles&gt;
+        &lt;profile&gt;
+            &lt;id&gt;sonar-project&lt;/id&gt;
+            &lt;activation&gt;
+                &lt;activeByDefault&gt;true&lt;/activeByDefault&gt;
+            &lt;/activation&gt;
+            &lt;properties&gt;
+                &lt;sonar.jdbc.url&gt;jdbc:mysql://192.168.6.213:3306/sonar&lt;/sonar.jdbc.url&gt;
+                &lt;sonar.jdbc.username&gt;root&lt;/sonar.jdbc.username&gt;
+                &lt;sonar.jdbc.password&gt;passok&lt;/sonar.jdbc.password&gt;
+                &lt;sonar.host.url&gt;http://192.168.6.213:9000&lt;/sonar.host.url&gt;
+                &lt;!-- 需要忽略的--&gt;
+                &lt;sonar.exclusions&gt;src/main/java/com/jsc/codec/**&lt;/sonar.exclusions&gt;
+            &lt;/properties&gt;
+        &lt;/profile&gt;
+    &lt;/profiles&gt;</code></pre>
+<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564121973140.png" alt="1564121973140"></p>
+<hr>
+<h2 id="Sonarqube使用"><a href="#Sonarqube使用" class="headerlink" title="Sonarqube使用"></a>Sonarqube使用</h2><p>SonarQube 是一个开源的代码分析平台, 用来持续分析和评测项目源代码的质量。 通过SonarQube我们可以检测出项目中重复代码， 潜在bug， 代码规范，安全性漏洞等问题， 并通过SonarQube web UI展示出来。</p>
+<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564124669244.png" alt="1564124669244"></p>
+<h3 id="1-SonarQube扫描方法"><a href="#1-SonarQube扫描方法" class="headerlink" title="1.SonarQube扫描方法"></a>1.SonarQube扫描方法</h3><p>Jenkins中调用<br>通过jenkins插件调用sonarScanner或使用Maven、Gradle等内置扫描器<br>依据项目需要，对代码持续扫描，并将结果推送到sonarqube 进行页面展示</p>
+<p>SonarQube Scanner<br>使用scanner，通过配置文件，修改项目信息，在命令行中调用scanner工具，进行扫描，并推送给sonarqube</p>
+<p>Maven、Gradle等内置扫描器 </p>
+<p>以maven为例，需要修改maven和sonarqube配置文件，在mvn编译后，使用mvn命令，进行代码扫描，并推送给sonarqube（需要编译源代码） ,参见上文。</p>
+<h3 id="2-SonarQube-web-UI"><a href="#2-SonarQube-web-UI" class="headerlink" title="2.SonarQube web UI"></a>2.SonarQube web UI</h3><p>显示用户所有的项目概况，各项目质量评级，并提供条件筛选 </p>
+<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564125155644.png" alt="1564125155644"></p>
+<h3 id="3-SonarQube-web-UI-–项目页面"><a href="#3-SonarQube-web-UI-–项目页面" class="headerlink" title="3.SonarQube web UI –项目页面"></a>3.SonarQube web UI –项目页面</h3><p>通过在主页面选择单个项目，进入项目详情，该页面提供了当前项目最近一次扫描的结果评级，历史累计和新增问题数量，代码行数等信息 。</p>
+<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564125184892.png" alt="1564125184892"></p>
+<h3 id="4-SonarQube-web-UI-–问题页面"><a href="#4-SonarQube-web-UI-–问题页面" class="headerlink" title="4.SonarQube web UI –问题页面"></a>4.SonarQube web UI –问题页面</h3><p>提供当前用户名下所有问题的列表，并提供条件筛选，包括问题类型，严重程度等<br>在当个项目中，问题页面显示单项目信息 。</p>
+<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564125329743.png" alt="1564125329743"></p>
+<p>选中单个问题，查看问题代码详情，sonarqube给出问题描述和修改意见 。</p>
+<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564125632530.png" alt="1564125632530"></p>
+<h3 id="5-SonarQube-web-UI-–评估页面"><a href="#5-SonarQube-web-UI-–评估页面" class="headerlink" title="5.SonarQube web UI –评估页面"></a>5.SonarQube web UI –评估页面</h3><p>给出当前项目的评估概况信息，大小，可靠性，重复率，覆盖率等 。</p>
+<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564125742365.png" alt="1564125742365"></p>
+<h3 id="6-SonarQube-web-UI-–代码页面"><a href="#6-SonarQube-web-UI-–代码页面" class="headerlink" title="6.SonarQube web UI –代码页面"></a>6.SonarQube web UI –代码页面</h3><p>以.java文件为依据，给出各个.java文件统计信息 。</p>
+<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564126037590.png" alt="1564126037590"></p>
+<h3 id="7-SonarQube-web-UI-–活动页面"><a href="#7-SonarQube-web-UI-–活动页面" class="headerlink" title="7.SonarQube web UI –活动页面"></a>7.SonarQube web UI –活动页面</h3><p>页面展示了每次代码扫描的基本信息和代码情况的折线图，折线图可以根据需要调整显示bugs数量，代码行数，覆盖率等信息 。</p>
+<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564126123324.png" alt="1564126123324"></p>
+<hr>
+<h2 id="SonarQube-Jekins集成"><a href="#SonarQube-Jekins集成" class="headerlink" title="SonarQube Jekins集成"></a>SonarQube Jekins集成</h2><h3 id="1、安装jenkins-sonar插件。"><a href="#1、安装jenkins-sonar插件。" class="headerlink" title="1、安装jenkins sonar插件。"></a>1、安装jenkins sonar插件。</h3><p>略</p>
+<h3 id="2、配置sonarServer"><a href="#2、配置sonarServer" class="headerlink" title="2、配置sonarServer"></a>2、配置sonarServer</h3><p>进入系统管理–&gt;系统配置界面。(这里选择测试环境的sonarQube地址)</p>
+<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564123349587.png" alt="1564123349587"></p>
+<p>进入系统管理–&gt;全局工具配置</p>
+<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564123462680.png" alt="1564123462680"></p>
+<h3 id="3、构建项目"><a href="#3、构建项目" class="headerlink" title="3、构建项目"></a>3、构建项目</h3><p>回到主页找到需要配置的项目，如果没有则需要新建项目，这里不赘述如何创建。选中项目配置sonar(这里使用</p>
+<p>sonar-scanner)。</p>
+<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564124297347.png" alt="1564124297347"></p>
+<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564123835385.png" alt="1564123835385"></p>
+<p>在构建历史中可以看到运行中的构建，点进去查看信息：</p>
+<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564124138444.png" alt="1564124138444"></p>
+<p>另外一种方式是使用maven命令打包，此时需要配置setting.xml，配置见前文。</p>
+<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564128857055.png" alt="1564128857055"></p>
+<h3 id="4、查看结果"><a href="#4、查看结果" class="headerlink" title="4、查看结果"></a>4、查看结果</h3><p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564124244878.png" alt="1564124244878"></p>
+
+                            <hr>
+                        </div>
+                        <br>
+                        <div>
+                            
+                            <p>
+                                <i class="iconfont icon-tag"></i>
+                                
+                            </p>
+                            
+                                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="d-none d-lg-block col-lg-2 toc-container">
+            
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i> Toc:</p> 
+    <div id="tocbot"></div>
+  </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+    <div class="container comments mx-auto" id="comments">
+        
+    </div>
+</div>
+    
+</main>
+
+<footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/0x2e/Material-T" target="_blank" rel="nofollow noopener"> <b>Material-T</b></a>
+    <br>
+    
+  </div>
+</footer>
+
+  <!-- SCRIPTS -->
+  <script src="/lib/mdbootstrap/js/jquery-3.4.1.min.js"></script>
+  <script src="/lib/mdbootstrap/js/popper.min.js"></script>
+  <script src="/lib/mdbootstrap/js/bootstrap.min.js?v=4.3.1"></script>
+  <script src="/lib/mdbootstrap/js/mdb.min.js?v=4.8.7"></script>
+  <script src="/lib/nprogress/nprogress.min.js?v=0.2.0"></script>
+  <script src="/js/main.js"></script>
+  
+    
+      <script src="/lib/tocbot/tocbot.min.js?v=4.7.0"></script>
+    
+    <script src="/js/post.js"></script>
+  
+  
+    <script src="/lib/prettify/prettify.min.js?v=0.1.0"></script>
+    <script>
+      $(document).ready(function(){
+        $('pre').addClass('prettyprint linenums');
+        prettyPrint();
+      })
+    </script>
+  
+  
+    <script src="/lib/typed/typed.min.js?v=2.0.9"></script>
+    <script>
+        var typed = new Typed('#subtitle', {
+          strings: [
+            '  ',
+            "&nbsp;",
+        ],
+        cursorChar: "_",
+        typeSpeed: 70,
+        startDelay: 300, //开始之前延迟300毫秒
+        loop: false,
+        });
+        $(".typed-cursor").addClass("h2");
+    </script>
+  
+  
+    <script src="/lib/anchor/anchor.min.js?v=4.2.0"></script>
+    <script>
+      anchors.options = {
+        placement: "right",
+        visible: "false",
+        
+      };
+      anchors.add(".post-content > h1,h2,h3,h4,h5,h6");
+    </script>
+  
+</body>
+</html>

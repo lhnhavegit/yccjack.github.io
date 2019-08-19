@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content>
+    <meta name="author" content="John Doe">
+    <meta name="keywords" content>
+    <title>深入浅析内存 ~ Hexo</title>
+    <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css?v=5.7.2">
+    <link rel="stylesheet" href="/lib/mdbootstrap/css/bootstrap.min.css?v=4.3.1">
+    <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css?v=4.8.7">
+    <link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css">
+    <link rel="stylesheet" href="/lib/nprogress/nprogress.css?v=0.2.0">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+    
+        <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+    
+    <link rel="stylesheet" href="/css/main.css">
+
+    
+</head>
+
+
+<body>
+<header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+<div class="container">
+    <a class="navbar-brand" href="/">&nbsp;<strong>Hexo</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto text-center">
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/archives/">Archives</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/categories/">Categories</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/tags/">Tags</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/about/">About</a>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+</nav>
+    <div class="view intro-2"
+         style="background: url('/img/post.jpg')no-repeat center center;background-size: cover;">
+        <div class="full-bg-img">
+            <div class="mask rgba-black-light flex-center">
+                <div class="container text-center white-text wow fadeInUp">
+                    <span class="h2" id="subtitle">
+                        
+                    </span>
+                    
+                        <br>
+                        <p>Monday, August 19th 2019, 9:36 am</p>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    
+        
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="d-none d-lg-block col-lg-2"></div>
+            <div class="col-lg-8 nopadding-md">
+                <div class="py-5 z-depth-3 board">
+                    <div class="post-content mx-auto">
+                        <div class="markdown-body">
+                            <h1 id="深入浅析内存"><a href="#深入浅析内存" class="headerlink" title="深入浅析内存"></a>深入浅析内存</h1><p>除了CPU，内存大概是最重要的计算资源了。基本称为分布式系统标配的缓存中间件、高性能的数据处理系统及当前流行的大数据平台，都离不开对计算机内存的深入理解与巧妙使用。</p>
+<h2 id="你所不知道的内存知识"><a href="#你所不知道的内存知识" class="headerlink" title="你所不知道的内存知识"></a>你所不知道的内存知识</h2><h3 id="复杂的CPU与单纯的内存"><a href="#复杂的CPU与单纯的内存" class="headerlink" title="复杂的CPU与单纯的内存"></a>复杂的CPU与单纯的内存</h3><p>首先，我们澄清几个容易让人混淆的CPU术语。</p>
+<blockquote>
+<ul>
+<li>Socket或者Processor：指一个屋里CPU芯片，盒装的或者散装的，上面有很多针脚，直接安装在主板上。</li>
+<li>Core：指Socket里封装的一个CPU核心，每个Core都是完全独立的计算单元，我们平时说的4核CPU，就是指一个Socket(Processor)里封装了4个Core。</li>
+<li>HT超线程：目前Intel与AMD的Processor大多支持在一个Core里并行执行两个线程，此时在操作系统看来就相当于两个逻辑CPU(Logical Processor),在大多数情况下，我们在程序里提到CPU这个概念时，就是指一个Logical Processor。</li>
+</ul>
+</blockquote>
+<p>&nbsp; &nbsp; 然后，我们先从第一个非常简单的问题开始：CPU可以直接操作内存吗？可能99%的程序员会不假思索的回答：「肯定的，不然程序怎么跑。」如果理性地分析一下，你会发现这个回答有问题：CPU与内存条是独立的两个硬件，而且CPU上也没有插槽和连线可以让内存条挂上去，也就是说，CPU并不能直接访问内存条，而是要通过主办上的其他硬件(接口)来间接访问内存条。</p>
+<p>&nbsp; &nbsp;第二个问题：CPU的运算速度与内存条的访问速度在回见的差距究竟有多大？这个差距跟王健林「先挣它个一个亿的」小目标和「普通人有车有房」的宏大目标之间的差距相比，是更大还是更小呢？答案是：「差不多」。通常来说，CPU的运算速度与内存访问速度之间的差距不过是100倍，假如有100万RMB就可以有有房(贷)有车(贷)了没那么其100倍就刚好是一亿RMB。</p>
+<p>&nbsp; &nbsp;既然CPU的速度与内存的速度还是存在高度两个数量级的巨大鸿沟，所有它们注定不能「幸福地在一起」，于是CPU的亲密伴侣Cache闪亮登场。与来自DRAM家族的内存(Memory)出身不同，Cache来自ASRAM家族。DRAM与SRAM最简单的区别是后者特别快，容量特别小，电路结构非常复杂，造假特别高。</p>
+<p>&nbsp; &nbsp;造成Cache与内存之间巨大性能差距的主要原因是工作原理和结构不同，如下所述。</p>
+<blockquote>
+<ul>
+<li>DRAM存储一个数据只需要一个电容加一个晶体管，SRAM则需要6个晶体管。由于DRAM的数据其实是保存在电容里的，所以每次读写过程中的充放电环节也导致了DRAM读写数据有一个延迟的问题，这个延迟通常为十几到几十ns。</li>
+<li>内存可以看做一个二维数据，每个存储单元都有其行地址和列地址。<br>由于SRAM的容量很小，所以存储单元的地址(行与列)比较短，可以一次性传输到SRAM中；而DRAM则需要分别传送行与列的地址。</li>
+<li>SRAM的频率基本与CPU的频率保持一致；而DRAM的频率知道DDR4以后才开始接近CPU的频率。</li>
+</ul>
+</blockquote>
+<p>&nbsp; &nbsp;Cache是被集成到CPU内部的一个存储单元，一级Cache(L1 Cache)通常只有32~64KB的容量，这个容量远远不能满足CPU大量、告诉存取的需求。此外，由于存储性能的答复提升往往伴随着价格的同步飙升，所以出于对整体成本的控制，现实中往往采用金字塔形的多级Cache体系来实现最佳缓存效果，于是出现了二级Cache(L2 Cache)及三级Cache(L3 Cache)，每一级Cache都牺牲了部分性能指标来换取更大的容量，目的是缓存更多的热点数据。以Intel家族 Intel Sandy Bridge架构的CPU为例，其L1 Cache容量为64KB，访问速度为1ns左右；L2 Cache容量扩大4倍，达到256KB，访问速度则降低到3ns左右；L3 Cache的容量则扩大512倍，达到32MB，访问速度也下降到12ns左右，即使如此，也比访问驻村的100ns(40ns+65ns)快一个数量级。此外，L3 Cache是被一个Socket上的所有CPU Core共享的，其实最早的L3 Cache被应用在AMD发布的K6-III处理器上，当时的L3 Cache受限于制造工艺，并没有被集成到CPU内部，而是集成到主板上。</p>
+<p>&nbsp; &nbsp;从Intel Sandy Bridge CPU架构图中可以看出，CPU如果要访问内存中的数据，则要经过L1、L2、L3这三道关卡后才能抵达目的地，这个过程并不是「皇上」(CPU)亲自出马，而是交由3个级别的贵妃(Cache)们层层转发「圣旨」(内部指令)，最红抵达「后宫」(内存).</p>
+<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1565571049876.png" alt="1565571049876"></p>
+<hr>
+<h3 id="多核CPU与内存共享的问题"><a href="#多核CPU与内存共享的问题" class="headerlink" title="多核CPU与内存共享的问题"></a>多核CPU与内存共享的问题</h3><p>&nbsp; &nbsp;在多核CPU的情况下，如何共享内存？</p>
+<p>&nbsp; &nbsp;如果擅长多线程高级编程，那么肯定会毫不犹豫地给出以下伪代码：</p>
+<pre><code class="java">synchronized(memory){
+    doSomething(...);
+}</code></pre>
+<p>&nbsp; &nbsp;如果真这个简单，那么这个世界上就不会只剩下两家独大的主流CPU制造商了，而且可怜的AMD一直被Intel「吊打」。</p>
+<p>&nbsp; &nbsp;多核CPU共享内存的问题也被称为Cache一致性问题，简单地说，就是多个CPU核心所看到的Cache数据应该是一直的，在某个数据被某个CPU写入自己的Cache(L1 Cache)以后，其他CPU都应该能看到相同的Cache数据；如果自己的Cache中有旧数据，则抛弃旧数据。考虑到每个CPU有自己内存独占的Cache，所以这个问题与分布式Cache保持同步的问题是同一类问题。来自Intel的MESI协议是目前业界公认的Cache一致性问题的最佳方案，大多数SMP架构都采用这一方案，虽然该协议是一个CPU内部的协议，但由于它对我们理解内存模型及解决分布式系统的数据一致性问题有重要的参考价值，所以在这对其进行简单介绍。</p>
+<p>&nbsp; &nbsp;Cache Line，如果有印象的话，则你会发现I/O操作从来不以字节为单位，而是以「块」为单位，这里有两个原因：首先，因为I/O操作比较慢，所以读一个字节与一个读连续N个字节所花费的时间基本相同；其次，数据访问往往具有空间连续性地特征，即我们通常会访问空间上连续的一些数据。举个例子，访问数组时通常会循环遍历，比如查找某个值或者进行比较等，如果把数组中连续的几个字节都读到内存中，那么CPU的处理速度会提升几倍。对于CPU来说，由于Memory也是慢速的外部组件，所以针对Memory的读写也采用类似I/O块的方式就不足为奇了。实际上，CPU Cache里的最小存储单元就是Cache Line，Intel CPU的一个Cache Line存储64个字节，每一级Cache都被划分为很多组Cache Line，典型的情况是4条Cache Line为一组，当Cache从Memory中加载数据时，一次加载一条Cache Line的数据。下图是Cache的结构。</p>
+<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1565572262318.png" alt="1565572262318"></p>
+<p>&nbsp; &nbsp;每个Cache Line的头部有两个Bit来表示自身的状态，总共4种状态。</p>
+<blockquote>
+<ul>
+<li>M（Modified）：修改状态，其他CPU上没有数据的副本，并且在本CPU上被修改过，与存储器中的数据不一致，最终必然会引发系统总线的写指令，将Cache Line的数据写回到Memory中。</li>
+<li>E(Exclusive)：独占状态，表示当前Cache Line中包含的数据与Memory中的数据一致，此外，其他CPU中没有数据的副本。</li>
+<li>S（Shared）：共享状态，表示Cache Line中包含的数据与Memory中的数据一致，而且在当前CPU和至少在其他某个CPU中有副本。</li>
+<li>I(Invalid)：无效状态，当前Cache Line中没有有效数据或该Cache Line的数据已经失效，不能再用，当Cache要加载新数据时，优先选择此状态的Cache Line，此外，Cache Line的初始状态也是I状态。</li>
+</ul>
+</blockquote>
+<p>&nbsp; &nbsp;MESI协议是用Cache Line的上述4种状态命名的，对Cache的读写操作引发了Cache Line的状态变化，因而可以理解为一种状态机模型。但MESI的复杂和独特之处在于状态的两种视角：一种是当前读写操作(Local Read/Write)所在CPU看到的自身的Cache Line状态及其他CPU上对应的Cache Line状态；另一种是一个CPU上的Cache Line状态的变迁会导致其他CPU上对应的Cache Line的状态变迁。如下所示为MESI协议的状态图。</p>
+<p><img src="C:%5CUsers%5CAdministrator.PC-201901241237%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1565573021589.png" alt="1565573021589"></p>
+<p>&nbsp; &nbsp;结合状态图，我们深入分析MESI协议的一些实现细节。</p>
+<p>&nbsp; &nbsp;（1）某个CPU(CPU A)发起本地读请求(Local Read)，比如读取某个内存地址的变量，如果此时所有的CPU的Cache中都没有加载此内存地址，即此内存地址对应的Cache Line为无效状态(Invalid)，则CPU A中的Cache会发起一个到Memory的内存Load指令，在相应的Cache Line中完成内存加载后，此Cache Line的状态会被标记位Exclusive。接下来，如果其他CPU(CPU B)在总线上也发起对同一个内存地址的读请求，则这个读请求会被CPU A 嗅探到(SNOOP),然后CPU A在内存总线上复制一份Cache Line作为应答，并将自身的Cache Line状态改为Shared，同时CPU B收到来自总线的应答并保存到自己的Cache里，也修改对应的Cache Line 状态为Shared。</p>
+<p>&nbsp; &nbsp;(2)某个CPU(CPU A)发起本地写请求(Loacl Write),比如对某个内存地址的变量赋值，如果此时多有的CPU的Cache中都没加载此内存地址，即此内存对应的Cache Line为无效状态(Invalid)，则CPU A 中的Cache Line保存了最新的内存变量值后，其祖航太修改为Modified。随后，如果CPU B发起对同一个变量的读操作(Remote Read)，则CPU A在总线嗅探到这个读请求以后，先将Cache Line里修改过的数据回写(Write Back)到Memory中，然后在内存总线上复制一份Cache Line作为应答，最后将自身的Cache Line状态修改为Shared，由此产生的结果是CPU A与CPU B里对应的Cache Line状态都为Shared。</p>
+<p>&nbsp; &nbsp;(3)以上面第二条内容为基础，CPU A发起本地写请求并导致自身的Cache Line状态变为Modified，如果此时CPU B 发起同一个内存地址的写请求(Remote Write)，则我们看到的状态图里此时CPU A 的Cache Line状态为Invalid 其原因如下。</p>
+<p>&nbsp; &nbsp;CPU B此时发出的是一个特殊的请求——读并且打算修改数据，当CPU A从总线上嗅探到这个请求后，会先阻止此请求并取得总线的控制权( Takes Control of Bus)，随后将Cache Line里修改过的数据回写到Memory中，再将此Cache Line的状态修改为Invalid(这是因为其他CPU要改数据，所以没必要改为Shared)。与此同时，CPU B 发现之前的请求并没有得到响应，于是重新发起一次请求，此时由于所有的CPU的Cache里都没有内存副本了，所以CPU B的Cache就从Memory中加载最新的数据到Cache Line中，随后修改数据，然后改变Cache Line的状态为Modified。</p>
+<p>  &nbsp; &nbsp;(4)如果内存中的某个变量被多个CPU加载到各自的Cache中，从而使得变量对应的Cache Line状态为Shared，若此时某个CPU打算对此变量进行写操作，则会导致所有拥有此变量缓存的CPU的Cache Line状态都变为Invalid，这是引发性能下降的一个典型Cache Miss 问题。</p>
+<p>  &nbsp; &nbsp;在理解了MESI协议以后，我们明白了一个重要的事实，即存在多个处理器时，对共享变量的修改操作会设计多个CPU之间协调问题及Cache失效问题，这就引发了著名的「Cache伪共享」问题。</p>
+<p>   &nbsp; &nbsp;如果要访问的数据不在CPU的运算单元里，则需要从缓存中加载，如果缓存中恰好有此数据而且数据有效，就命中一次(Cache Hit)，反之产生一次Cache Miss ，此时需要从下一级缓存或主存中再次尝试加载。根据之前的分析，如果发生了Cache Miss，则数据的访问性能瞬间下降很多！在我们需要大量加载运算的情况下，数据结构、访问方式及程序运算方面是否符合「缓存友好」的设计，就成为「量变引起质变」得关键性因素了。这也是为什么最近，国外很多大数据领域的专家都热衷于研究设计和采用新一代的数据结构和算法，而其核心之一就是「缓存友好」。</p>
+<hr>
+<h3 id="著名的Cache伪共享问题"><a href="#著名的Cache伪共享问题" class="headerlink" title="著名的Cache伪共享问题"></a>著名的Cache伪共享问题</h3>
+                            <hr>
+                        </div>
+                        <br>
+                        <div>
+                            
+                                <p>
+                                    <i class="iconfont icon-inbox"></i>
+                                    
+                                        <a class="hover-with-bg" href="/categories/java">java</a>
+                                        &nbsp;
+                                    
+                                </p>
+                            
+                            <p>
+                                <i class="iconfont icon-tag"></i>
+                                
+                                    <a class="hover-with-bg" href="/tags/%E5%86%85%E5%AD%98">内存</a>
+                                
+                                    <a class="hover-with-bg" href="/tags/java">java</a>
+                                
+                            </p>
+                            
+                                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="d-none d-lg-block col-lg-2 toc-container">
+            
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i> Toc:</p> 
+    <div id="tocbot"></div>
+  </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+    <div class="container comments mx-auto" id="comments">
+        
+    </div>
+</div>
+    
+</main>
+
+<footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/0x2e/Material-T" target="_blank" rel="nofollow noopener"> <b>Material-T</b></a>
+    <br>
+    
+  </div>
+</footer>
+
+  <!-- SCRIPTS -->
+  <script src="/lib/mdbootstrap/js/jquery-3.4.1.min.js"></script>
+  <script src="/lib/mdbootstrap/js/popper.min.js"></script>
+  <script src="/lib/mdbootstrap/js/bootstrap.min.js?v=4.3.1"></script>
+  <script src="/lib/mdbootstrap/js/mdb.min.js?v=4.8.7"></script>
+  <script src="/lib/nprogress/nprogress.min.js?v=0.2.0"></script>
+  <script src="/js/main.js"></script>
+  
+    
+      <script src="/lib/tocbot/tocbot.min.js?v=4.7.0"></script>
+    
+    <script src="/js/post.js"></script>
+  
+  
+    <script src="/lib/prettify/prettify.min.js?v=0.1.0"></script>
+    <script>
+      $(document).ready(function(){
+        $('pre').addClass('prettyprint linenums');
+        prettyPrint();
+      })
+    </script>
+  
+  
+    <script src="/lib/typed/typed.min.js?v=2.0.9"></script>
+    <script>
+        var typed = new Typed('#subtitle', {
+          strings: [
+            '  ',
+            "深入浅析内存&nbsp;",
+        ],
+        cursorChar: "_",
+        typeSpeed: 70,
+        startDelay: 300, //开始之前延迟300毫秒
+        loop: false,
+        });
+        $(".typed-cursor").addClass("h2");
+    </script>
+  
+  
+    <script src="/lib/anchor/anchor.min.js?v=4.2.0"></script>
+    <script>
+      anchors.options = {
+        placement: "right",
+        visible: "false",
+        
+      };
+      anchors.add(".post-content > h1,h2,h3,h4,h5,h6");
+    </script>
+  
+</body>
+</html>

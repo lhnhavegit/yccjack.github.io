@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content>
+    <meta name="author" content="John Doe">
+    <meta name="keywords" content>
+    <title>Hexo</title>
+    <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css?v=5.7.2">
+    <link rel="stylesheet" href="/lib/mdbootstrap/css/bootstrap.min.css?v=4.3.1">
+    <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css?v=4.8.7">
+    <link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css">
+    <link rel="stylesheet" href="/lib/nprogress/nprogress.css?v=0.2.0">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+    
+        <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+    
+    <link rel="stylesheet" href="/css/main.css">
+
+    
+</head>
+
+
+<body>
+<header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+<div class="container">
+    <a class="navbar-brand" href="/">&nbsp;<strong>Hexo</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto text-center">
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/archives/">Archives</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/categories/">Categories</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/tags/">Tags</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/about/">About</a>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+</nav>
+    <div class="view intro-2"
+         style="background: url('/img/post.jpg')no-repeat center center;background-size: cover;">
+        <div class="full-bg-img">
+            <div class="mask rgba-black-light flex-center">
+                <div class="container text-center white-text wow fadeInUp">
+                    <span class="h2" id="subtitle">
+                        
+                    </span>
+                    
+                        <br>
+                        <p>Monday, August 19th 2019, 9:16 am</p>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    
+        
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="d-none d-lg-block col-lg-2"></div>
+            <div class="col-lg-8 nopadding-md">
+                <div class="py-5 z-depth-3 board">
+                    <div class="post-content mx-auto">
+                        <div class="markdown-body">
+                            <h1 id="Mockito和PowerMock用法"><a href="#Mockito和PowerMock用法" class="headerlink" title="Mockito和PowerMock用法"></a>Mockito和PowerMock用法</h1><hr>
+<p>[TOC]</p>
+<hr>
+<h2 id="一、mock测试和Mock对象"><a href="#一、mock测试和Mock对象" class="headerlink" title="一、mock测试和Mock对象"></a>一、mock测试和Mock对象</h2><p>mock对象就是在调试期间用来作为真实对象的替代品<br>mock测试就是在测试过程中，对那些不容易构建的对象用一个虚拟对象来代替测试的方法就叫mock测试</p>
+<h2 id="二、Mockito和PowerMock"><a href="#二、Mockito和PowerMock" class="headerlink" title="二、Mockito和PowerMock"></a>二、Mockito和PowerMock</h2><p>  PowerMock是Java开发中的一种Mock框架，用于单元模块测试。当你想要测试一个service接口，但service需要经过防火墙访问，防火墙不能为你打开或者你需要认证才能访问。遇到这样情况时，你可以在你能访问的地方使用MockService替代，模拟实现获取数据。<br>  PowerMock可以实现完成对private/static/final方法的Mock（模拟），而Mockito可以对普通的方法进行Mock，如：public等。</p>
+<h2 id="三、Mockito的使用"><a href="#三、Mockito的使用" class="headerlink" title="三、Mockito的使用"></a>三、Mockito的使用</h2><pre><code class="java">// 1、模拟HttpServletRequest对象，不需要依赖web容器，模拟获得请求参数
+HttpServletRequest request = mock(HttpServletRequest.class); 
+when(request.getParameter(&quot;foo&quot;)).thenReturn(&quot;boo&quot;);
+// 注意:mock()是Mockito的静态方法，可以用@mock注解替换
+private @mock HttpServletRequest request</code></pre>
+<pre><code class="java">// 2、Person person =mock(Person.class);
+// 第一次调用返回&quot;xiaoming&quot;，第二次调用返回&quot;xiaohong&quot;
+when(person.getName()).thenReturn(&quot;xiaoming&quot;).thenReturn(&quot;xiaohong&quot;); 
+when(person.getName()).thenReturn(&quot;xiaoming&quot;, &quot;xiaohong&quot;); 
+when(person.getName()).thenReturn(&quot;xiaoming&quot;); 
+when(person.getName()).thenReturn(&quot;xiaohong&quot;);</code></pre>
+<pre><code class="java">// 3、mockito模拟测试无返回值的方法
+Person person =mock(Person.class);
+doNothing().when(person).remove();</code></pre>
+<pre><code class="java">// 4、mockito还能对被测试的方法强行抛出异常
+Person person =mock(Person.class);
+doThrow(new RuntimeException()).when(person).remove();
+when(person.next()).thenThrow(new RuntimeException());</code></pre>
+<pre><code class="java">// 5、//UserAppService用于参数匹配器的demo
+参数匹配器
+    UserApp app = new UserApp();
+    app.setAppKey(&quot;q1w2e3r4t5y6u7i8o9p0&quot;);
+    app.setAppSecret(&quot;q1w2e3r4t5y6u7i8o9p0&quot;);
+    when(userAppMapper.getAppSecretByAppKey(argThat(new ArgumentMatcher&lt;String&gt;() {
+        @Override
+        public boolean matches(Object argument) {
+            String arg = (String) argument;
+            if (arg.equals(&quot;1234567890&quot;) || arg.equals(&quot;q1w2e3r4t5y6u7i8o9p0&quot;)) {
+                return true;
+            } else {
+                throw new RuntimeException();
+            }
+        }
+    }))).thenReturn(app);</code></pre>
+<pre><code class="java">// 6、Answer接口模拟根据参数返回不同结果
+    when(userAppMapper.getAppSecretByAppKey(anyString())).thenAnswer(
+            (InvocationOnMock invocationOnMock) -&gt; {
+                String arg = (String) invocationOnMock.getArguments()[0];
+                if (null == arg || arg.equals(null)) {
+                    return null;
+                } else if (arg.equals(&quot;q1w2e3r4t5y6u7i8o9p0&quot;)) {
+                    UserApp app = new UserApp();
+                    app.setAppKey(&quot;q1w2e3r4t5y6u7i8o9p0&quot;);
+                    app.setAppSecret(&quot;q1w2e3r4t5y6u7i8o9p0&quot;);
+                    return app;
+                } else {
+                    return null;
+                }
+
+            });
+</code></pre>
+<pre><code class="java">// 7、Mock对象是能调用模拟方法，调用不了它真实的方法，但是spy() 或者@spy 可以监视一个真实的对象，对它进行方法调用时它将调用真实的方法，同时也可以设定这个对象的方法让它返回我们的期望值。同时，我们也可以用verify进行验证。
+class A {
+  public void goHome() {  
+      System.out.println(&quot;I say go go go!!&quot;); 
+       return true; 
+   }  
+ }
+  //  当需要整体Mock，只有少部分方法执行真正部分时，选用这种方式 
+   A mockA = Mockito.mock(A.class);   
+   Mockito.doCallRealMethod().when(mockA).goHome(); 
+  // 当需要整体执行真正部分，只有少部分方法执行mock，选用这种方式  
+   A spyA = Mockito.spy(new A());   
+   Mockito.when(spyA.goHome()).thenReturn(false); </code></pre>
+<p><strong>Demo演示</strong></p>
+<pre><code class="java">//目标测试类
+@Service
+public class UserAppService {
+
+    @Autowired
+    private UserAppMapper userAppMapper;
+
+    /**
+     * 通过appKey查询AppSecre
+     * @return
+     */
+    public String getAppSecretByAppKey(String appKey){
+        if (StringUtils.isEmpty(appKey)) {
+            return null;
+        }
+        UserApp userApp = userAppMapper.getAppSecretByAppKey(appKey);
+        if (null == userApp) {
+            return null;
+        }
+        return userApp.getAppSecret();
+    }
+}
+@RunWith(SpringJUnit4ClassRunner.class)
+public class UserAppServiceTest {
+    @InjectMocks //创建一个实例，其余用@Mock（或@Spy）注解创建的mock将被注入到用该实例中
+    private UserAppService userAppService;
+    @Mock
+    private UserAppMapper userAppMapper;
+    @Before
+    public void setUp() { MockitoAnnotations.initMocks(this);  }//初始化Mock对象
+    @Test
+    public void getAppSecretByAppKey3() throws Exception {
+        when(userAppMapper.getAppSecretByAppKey(anyString())).thenAnswer(
+                (InvocationOnMock invocationOnMock) -&gt; {
+                    String arg = (String) invocationOnMock.getArguments()[0];
+                    if (null == arg || arg.equals(null)) {
+                        return null;
+                    } else if (arg.equals(&quot;q1w2e3r4t5y6u7i8o9p0&quot;)) {
+                        UserApp app = new UserApp();
+                        app.setAppKey(&quot;q1w2e3r4t5y6u7i8o9p0&quot;);
+                        app.setAppSecret(&quot;q1w2e3r4t5y6u7i8o9p0&quot;);
+                        return app;
+                    } else {
+                        return null;
+                    }
+
+                });
+        assertEquals(userAppService.getAppSecretByAppKey(&quot;q1w2e3r4t5y6u7i8o9p0&quot;), &quot;q1w2e3r4t5y6u7i8o9p0&quot;);
+        assertEquals(userAppService.getAppSecretByAppKey(&quot;123456789&quot;), null);
+        assertEquals(userAppService.getAppSecretByAppKey(null), null);
+        verify(userAppMapper, only()).getAppSecretByAppKey(anyString());
+    }
+// 注意：verify记录着这个模拟对象调用了什么方法，调用了多少次，never() 没有被调用，相当于 times(0)，atLeast(N) 至少被调用 N 次，atLeastOnce() 相当于 atLeast(1)，atMost(N) 最多被调用 N 次
+// 参数匹配也可以为：verify(mock).someMethod(anyInt(), anyString()); </code></pre>
+<h2 id="四、PowerMock的使用"><a href="#四、PowerMock的使用" class="headerlink" title="四、PowerMock的使用"></a>四、PowerMock的使用</h2><p>PowerMock基于Mockito开发，起语法规则与Mockito一致，主要区别在于使用方面，以实现完成对<strong>private/static/fina</strong>l等方法(也支持mock的对象是在方法内部new出来的)的Mock（模拟）。具体事例如下：</p>
+<p><strong>依赖</strong></p>
+<pre><code class="xml">&lt;dependency&gt;
+   &lt;groupId&gt;org.powermock&lt;/groupId&gt;
+   &lt;artifactId&gt;powermock-module-junit4&lt;/artifactId&gt;
+   &lt;version&gt;${powermock.version}&lt;/version&gt;
+   &lt;scope&gt;test&lt;/scope&gt;
+   &lt;exclusions&gt;
+      &lt;exclusion&gt;
+         &lt;artifactId&gt;objenesis&lt;/artifactId&gt;
+         &lt;groupId&gt;org.objenesis&lt;/groupId&gt;
+      &lt;/exclusion&gt;
+   &lt;/exclusions&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+   &lt;groupId&gt;org.powermock&lt;/groupId&gt;
+   &lt;artifactId&gt;powermock-api-mockito&lt;/artifactId&gt;
+   &lt;version&gt;${powermock.version}&lt;/version&gt;
+   &lt;scope&gt;test&lt;/scope&gt;
+&lt;/dependency&gt;</code></pre>
+<pre><code class="html">//2、 PowerMock有两个重要的注解：
+      –@RunWith(PowerMockRunner.class)
+      –@PrepareForTest( { YourClassWithEgStaticMethod.class })
+     // 如果你的测试用例里没有使用注解@PrepareForTest，那么可以不用加注解@RunWith(PowerMockRunner.class)，反之亦然。当你需要使用PowerMock强大功能（Mock静态、final、私有方法等）的时候，就需要加注解@PrepareForTest。
+</code></pre>
+<pre><code class="java">//测试类
+public class ClassUnderTest {  
+    public boolean callArgumentInstance(File file) {  
+        return file.exists();  
+    }   
+    public boolean callFinalMethod(ClassDependency refer) {  
+        return refer.isAlive();  
+    }  
+    public boolean callStaticMethod() {  
+        return ClassDependency.isExist();  
+    }  
+    public boolean callPrivateMethod() {  
+       return ClassDependency.delete(); 
+    }  
+}  
+//依赖类
+public class ClassDependency {  
+    public static boolean isExist() {   
+        return false;  
+    }  
+    public final boolean isAlive() {  
+        return false;  
+    }  
+    priavte final boolean delete() {  
+        return false;  
+    }  
+}   </code></pre>
+<pre><code class="java">// 2、Mock方法内部new出来的对象
+public void testCallInternalInstance() throws Exception {  
+    File file = PowerMockito.mock(File.class);  
+    ClassUnderTest underTest = new ClassUnderTest();  
+    PowerMockito.whenNew(File.class).withArguments(&quot;bbb&quot;).thenReturn(file);  
+    PowerMockito.when(underTest.callArgumentInstance( new File(&quot;bbb&quot;))).thenReturn(true);  
+    PowerMockito.when(file.exists()).thenReturn(true); 
+    Assert.assertTrue(file.exists(); 
+}   </code></pre>
+<pre><code class="java">// 3、Mock普通对象的final方法
+public void testCallFinalMethod() {  
+    ClassDependency depencency = PowerMockito.mock(ClassDependency.class);  
+    ClassUnderTest underTest = new ClassUnderTest();  
+    PowerMockito.when(depencency.isAlive()).thenReturn(true);  
+    Assert.assertTrue(underTest.callFinalMethod(depencency)); 
+}  </code></pre>
+<pre><code class="java">// 4、Mock静态方法
+public void testCallStaticMethod() {  
+    ClassUnderTest underTest = new ClassUnderTest();  
+    PowerMockito.mockStatic(ClassDependency.class);  
+    PowerMockito.when(ClassDependency.isExist()).thenReturn(true);  
+    Assert.assertTrue(underTest.callStaticMethod());  
+}</code></pre>
+<pre><code class="java">// 5、Mock私有方法
+public void testCallPrivateMethod() throws Exception {  
+    ClassUnderTest underTest = PowerMockito.mock(ClassUnderTest.class);  
+    PowerMockito.when(underTest,&quot;callPrivateMethod&quot;).thenCallRealMethod(); 
+    Assert.assertTrue(underTest.callPrivateMethod());  
+ }</code></pre>
+<hr>
+
+                            <hr>
+                        </div>
+                        <br>
+                        <div>
+                            
+                            <p>
+                                <i class="iconfont icon-tag"></i>
+                                
+                            </p>
+                            
+                                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="d-none d-lg-block col-lg-2 toc-container">
+            
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i> Toc:</p> 
+    <div id="tocbot"></div>
+  </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+    <div class="container comments mx-auto" id="comments">
+        
+    </div>
+</div>
+    
+</main>
+
+<footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/0x2e/Material-T" target="_blank" rel="nofollow noopener"> <b>Material-T</b></a>
+    <br>
+    
+  </div>
+</footer>
+
+  <!-- SCRIPTS -->
+  <script src="/lib/mdbootstrap/js/jquery-3.4.1.min.js"></script>
+  <script src="/lib/mdbootstrap/js/popper.min.js"></script>
+  <script src="/lib/mdbootstrap/js/bootstrap.min.js?v=4.3.1"></script>
+  <script src="/lib/mdbootstrap/js/mdb.min.js?v=4.8.7"></script>
+  <script src="/lib/nprogress/nprogress.min.js?v=0.2.0"></script>
+  <script src="/js/main.js"></script>
+  
+    
+      <script src="/lib/tocbot/tocbot.min.js?v=4.7.0"></script>
+    
+    <script src="/js/post.js"></script>
+  
+  
+    <script src="/lib/prettify/prettify.min.js?v=0.1.0"></script>
+    <script>
+      $(document).ready(function(){
+        $('pre').addClass('prettyprint linenums');
+        prettyPrint();
+      })
+    </script>
+  
+  
+    <script src="/lib/typed/typed.min.js?v=2.0.9"></script>
+    <script>
+        var typed = new Typed('#subtitle', {
+          strings: [
+            '  ',
+            "&nbsp;",
+        ],
+        cursorChar: "_",
+        typeSpeed: 70,
+        startDelay: 300, //开始之前延迟300毫秒
+        loop: false,
+        });
+        $(".typed-cursor").addClass("h2");
+    </script>
+  
+  
+    <script src="/lib/anchor/anchor.min.js?v=4.2.0"></script>
+    <script>
+      anchors.options = {
+        placement: "right",
+        visible: "false",
+        
+      };
+      anchors.add(".post-content > h1,h2,h3,h4,h5,h6");
+    </script>
+  
+</body>
+</html>
