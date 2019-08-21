@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="单元测试,java,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="在单元测试中，我们往往想去独立地去测一个类中的某个方法，但是这个类可不是独立的，它会去调用一些其它类的方法和service，这也就导致了以下两个问题：外部服务可能无法在单元测试的环境中正常工作，因为它们可能需要访问数据库或者使用一些其它的外部系统。我们的测试关注点在于这个类的实现上，外部类的一些行为可能会影响到我们对本类的测试，那也就失去了我们进行单测的意义。">
+<meta name="keywords" content="单元测试,java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mockito和PowerMock用法">
+<meta property="og:url" content="http://yoursite.com/2019/08/21/powermock/index.html">
+<meta property="og:site_name" content="MysticalYcc">
+<meta property="og:description" content="在单元测试中，我们往往想去独立地去测一个类中的某个方法，但是这个类可不是独立的，它会去调用一些其它类的方法和service，这也就导致了以下两个问题：外部服务可能无法在单元测试的环境中正常工作，因为它们可能需要访问数据库或者使用一些其它的外部系统。我们的测试关注点在于这个类的实现上，外部类的一些行为可能会影响到我们对本类的测试，那也就失去了我们进行单测的意义。">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-08-21T00:46:02.364Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mockito和PowerMock用法">
+<meta name="twitter:description" content="在单元测试中，我们往往想去独立地去测一个类中的某个方法，但是这个类可不是独立的，它会去调用一些其它类的方法和service，这也就导致了以下两个问题：外部服务可能无法在单元测试的环境中正常工作，因为它们可能需要访问数据库或者使用一些其它的外部系统。我们的测试关注点在于这个类的实现上，外部类的一些行为可能会影响到我们对本类的测试，那也就失去了我们进行单测的意义。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/08/21/powermock/">
+
+
+
+
+
+  <title>Mockito和PowerMock用法 | MysticalYcc</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">MysticalYcc</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/21/powermock/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="俞超超">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MysticalYcc">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Mockito和PowerMock用法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-21T08:46:02+08:00">
+                2019-08-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/08/21/powermock/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/08/21/powermock/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  在单元测试中，我们往往想去独立地去测一个类中的某个方法，但是这个类可不是独立的，它会去调用一些其它类的方法和service，这也就导致了以下两个问题：外部服务可能无法在单元测试的环境中正常工作，因为它们可能需要访问数据库或者使用一些其它的外部系统。我们的测试关注点在于这个类的实现上，外部类的一些行为可能会影响到我们对本类的测试，那也就失去了我们进行单测的意义。
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Mockito和PowerMock用法"><a href="#Mockito和PowerMock用法" class="headerlink" title="Mockito和PowerMock用法"></a>Mockito和PowerMock用法</h1><hr>
+<hr>
+<h2 id="一、mock测试和Mock对象"><a href="#一、mock测试和Mock对象" class="headerlink" title="一、mock测试和Mock对象"></a>一、mock测试和Mock对象</h2><p>mock对象就是在调试期间用来作为真实对象的替代品<br>mock测试就是在测试过程中，对那些不容易构建的对象用一个虚拟对象来代替测试的方法就叫mock测试</p>
+<h2 id="二、Mockito和PowerMock"><a href="#二、Mockito和PowerMock" class="headerlink" title="二、Mockito和PowerMock"></a>二、Mockito和PowerMock</h2><p>  PowerMock是Java开发中的一种Mock框架，用于单元模块测试。当你想要测试一个service接口，但service需要经过防火墙访问，防火墙不能为你打开或者你需要认证才能访问。遇到这样情况时，你可以在你能访问的地方使用MockService替代，模拟实现获取数据。<br>  PowerMock可以实现完成对private/static/final方法的Mock（模拟），而Mockito可以对普通的方法进行Mock，如：public等。</p>
+<h2 id="三、Mockito的使用"><a href="#三、Mockito的使用" class="headerlink" title="三、Mockito的使用"></a>三、Mockito的使用</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1、模拟HttpServletRequest对象，不需要依赖web容器，模拟获得请求参数</span></span><br><span class="line">HttpServletRequest request = mock(HttpServletRequest.class); </span><br><span class="line">when(request.getParameter(<span class="string">"foo"</span>)).thenReturn(<span class="string">"boo"</span>);</span><br><span class="line"><span class="comment">// 注意:mock()是Mockito的静态方法，可以用@mock注解替换</span></span><br><span class="line"><span class="keyword">private</span> <span class="meta">@mock</span> HttpServletRequest request</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 2、Person person =mock(Person.class);</span></span><br><span class="line"><span class="comment">// 第一次调用返回"xiaoming"，第二次调用返回"xiaohong"</span></span><br><span class="line">when(person.getName()).thenReturn(<span class="string">"xiaoming"</span>).thenReturn(<span class="string">"xiaohong"</span>); </span><br><span class="line">when(person.getName()).thenReturn(<span class="string">"xiaoming"</span>, <span class="string">"xiaohong"</span>); </span><br><span class="line">when(person.getName()).thenReturn(<span class="string">"xiaoming"</span>); </span><br><span class="line">when(person.getName()).thenReturn(<span class="string">"xiaohong"</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 3、mockito模拟测试无返回值的方法</span></span><br><span class="line">Person person =mock(Person.class);</span><br><span class="line">doNothing().when(person).remove();</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 4、mockito还能对被测试的方法强行抛出异常</span></span><br><span class="line">Person person =mock(Person.class);</span><br><span class="line">doThrow(<span class="keyword">new</span> RuntimeException()).when(person).remove();</span><br><span class="line">when(person.next()).thenThrow(<span class="keyword">new</span> RuntimeException());</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 5、//UserAppService用于参数匹配器的demo</span></span><br><span class="line">参数匹配器</span><br><span class="line">    UserApp app = <span class="keyword">new</span> UserApp();</span><br><span class="line">    app.setAppKey(<span class="string">"q1w2e3r4t5y6u7i8o9p0"</span>);</span><br><span class="line">    app.setAppSecret(<span class="string">"q1w2e3r4t5y6u7i8o9p0"</span>);</span><br><span class="line">    when(userAppMapper.getAppSecretByAppKey(argThat(<span class="keyword">new</span> ArgumentMatcher&lt;String&gt;() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">matches</span><span class="params">(Object argument)</span> </span>&#123;</span><br><span class="line">            String arg = (String) argument;</span><br><span class="line">            <span class="keyword">if</span> (arg.equals(<span class="string">"1234567890"</span>) || arg.equals(<span class="string">"q1w2e3r4t5y6u7i8o9p0"</span>)) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;))).thenReturn(app);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 6、Answer接口模拟根据参数返回不同结果</span></span><br><span class="line">    when(userAppMapper.getAppSecretByAppKey(anyString())).thenAnswer(</span><br><span class="line">            (InvocationOnMock invocationOnMock) -&gt; &#123;</span><br><span class="line">                String arg = (String) invocationOnMock.getArguments()[<span class="number">0</span>];</span><br><span class="line">                <span class="keyword">if</span> (<span class="keyword">null</span> == arg || arg.equals(<span class="keyword">null</span>)) &#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (arg.equals(<span class="string">"q1w2e3r4t5y6u7i8o9p0"</span>)) &#123;</span><br><span class="line">                    UserApp app = <span class="keyword">new</span> UserApp();</span><br><span class="line">                    app.setAppKey(<span class="string">"q1w2e3r4t5y6u7i8o9p0"</span>);</span><br><span class="line">                    app.setAppSecret(<span class="string">"q1w2e3r4t5y6u7i8o9p0"</span>);</span><br><span class="line">                    <span class="keyword">return</span> app;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            &#125;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 7、Mock对象是能调用模拟方法，调用不了它真实的方法，但是spy() 或者@spy 可以监视一个真实的对象，对它进行方法调用时它将调用真实的方法，同时也可以设定这个对象的方法让它返回我们的期望值。同时，我们也可以用verify进行验证。</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">goHome</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">      System.out.println(<span class="string">"I say go go go!!"</span>); </span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">true</span>; </span><br><span class="line">   &#125;  </span><br><span class="line"> &#125;</span><br><span class="line">  <span class="comment">//  当需要整体Mock，只有少部分方法执行真正部分时，选用这种方式 </span></span><br><span class="line">   A mockA = Mockito.mock(A.class);   </span><br><span class="line">   Mockito.doCallRealMethod().when(mockA).goHome(); </span><br><span class="line">  <span class="comment">// 当需要整体执行真正部分，只有少部分方法执行mock，选用这种方式  </span></span><br><span class="line">   A spyA = Mockito.spy(<span class="keyword">new</span> A());   </span><br><span class="line">   Mockito.when(spyA.goHome()).thenReturn(<span class="keyword">false</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>Demo演示</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//目标测试类</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserAppService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserAppMapper userAppMapper;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 通过appKey查询AppSecre</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getAppSecretByAppKey</span><span class="params">(String appKey)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (StringUtils.isEmpty(appKey)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        UserApp userApp = userAppMapper.getAppSecretByAppKey(appKey);</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">null</span> == userApp) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> userApp.getAppSecret();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@RunWith</span>(SpringJUnit4ClassRunner.class)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserAppServiceTest</span> </span>&#123;</span><br><span class="line">    <span class="meta">@InjectMocks</span> <span class="comment">//创建一个实例，其余用@Mock（或@Spy）注解创建的mock将被注入到用该实例中</span></span><br><span class="line">    <span class="keyword">private</span> UserAppService userAppService;</span><br><span class="line">    <span class="meta">@Mock</span></span><br><span class="line">    <span class="keyword">private</span> UserAppMapper userAppMapper;</span><br><span class="line">    <span class="meta">@Before</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUp</span><span class="params">()</span> </span>&#123; MockitoAnnotations.initMocks(<span class="keyword">this</span>);  &#125;<span class="comment">//初始化Mock对象</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getAppSecretByAppKey3</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        when(userAppMapper.getAppSecretByAppKey(anyString())).thenAnswer(</span><br><span class="line">                (InvocationOnMock invocationOnMock) -&gt; &#123;</span><br><span class="line">                    String arg = (String) invocationOnMock.getArguments()[<span class="number">0</span>];</span><br><span class="line">                    <span class="keyword">if</span> (<span class="keyword">null</span> == arg || arg.equals(<span class="keyword">null</span>)) &#123;</span><br><span class="line">                        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">                    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (arg.equals(<span class="string">"q1w2e3r4t5y6u7i8o9p0"</span>)) &#123;</span><br><span class="line">                        UserApp app = <span class="keyword">new</span> UserApp();</span><br><span class="line">                        app.setAppKey(<span class="string">"q1w2e3r4t5y6u7i8o9p0"</span>);</span><br><span class="line">                        app.setAppSecret(<span class="string">"q1w2e3r4t5y6u7i8o9p0"</span>);</span><br><span class="line">                        <span class="keyword">return</span> app;</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                &#125;);</span><br><span class="line">        assertEquals(userAppService.getAppSecretByAppKey(<span class="string">"q1w2e3r4t5y6u7i8o9p0"</span>), <span class="string">"q1w2e3r4t5y6u7i8o9p0"</span>);</span><br><span class="line">        assertEquals(userAppService.getAppSecretByAppKey(<span class="string">"123456789"</span>), <span class="keyword">null</span>);</span><br><span class="line">        assertEquals(userAppService.getAppSecretByAppKey(<span class="keyword">null</span>), <span class="keyword">null</span>);</span><br><span class="line">        verify(userAppMapper, only()).getAppSecretByAppKey(anyString());</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">// 注意：verify记录着这个模拟对象调用了什么方法，调用了多少次，never() 没有被调用，相当于 times(0)，atLeast(N) 至少被调用 N 次，atLeastOnce() 相当于 atLeast(1)，atMost(N) 最多被调用 N 次</span></span><br><span class="line"><span class="comment">// 参数匹配也可以为：verify(mock).someMethod(anyInt(), anyString());</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="四、PowerMock的使用"><a href="#四、PowerMock的使用" class="headerlink" title="四、PowerMock的使用"></a>四、PowerMock的使用</h2><p>PowerMock基于Mockito开发，起语法规则与Mockito一致，主要区别在于使用方面，以实现完成对<strong>private/static/fina</strong>l等方法(也支持mock的对象是在方法内部new出来的)的Mock（模拟）。具体事例如下：</p>
+<p><strong>依赖</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.powermock<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>powermock-module-junit4<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;powermock.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>objenesis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.objenesis<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.powermock<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>powermock-api-mockito<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;powermock.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//2、 PowerMock有两个重要的注解：</span><br><span class="line">      –@RunWith(PowerMockRunner.class)</span><br><span class="line">      –@PrepareForTest( &#123; YourClassWithEgStaticMethod.class &#125;)</span><br><span class="line">     // 如果你的测试用例里没有使用注解@PrepareForTest，那么可以不用加注解@RunWith(PowerMockRunner.class)，反之亦然。当你需要使用PowerMock强大功能（Mock静态、final、私有方法等）的时候，就需要加注解@PrepareForTest。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//测试类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassUnderTest</span> </span>&#123;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">callArgumentInstance</span><span class="params">(File file)</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">return</span> file.exists();  </span><br><span class="line">    &#125;   </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">callFinalMethod</span><span class="params">(ClassDependency refer)</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">return</span> refer.isAlive();  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">callStaticMethod</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">return</span> ClassDependency.isExist();  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">callPrivateMethod</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">       <span class="keyword">return</span> ClassDependency.delete(); </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="comment">//依赖类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassDependency</span> </span>&#123;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isExist</span><span class="params">()</span> </span>&#123;   </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">boolean</span> <span class="title">isAlive</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="function">priavte <span class="keyword">final</span> <span class="keyword">boolean</span> <span class="title">delete</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 2、Mock方法内部new出来的对象</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testCallInternalInstance</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;  </span><br><span class="line">    File file = PowerMockito.mock(File.class);  </span><br><span class="line">    ClassUnderTest underTest = <span class="keyword">new</span> ClassUnderTest();  </span><br><span class="line">    PowerMockito.whenNew(File.class).withArguments(<span class="string">"bbb"</span>).thenReturn(file);  </span><br><span class="line">    PowerMockito.when(underTest.callArgumentInstance( <span class="keyword">new</span> File(<span class="string">"bbb"</span>))).thenReturn(<span class="keyword">true</span>);  </span><br><span class="line">    PowerMockito.when(file.exists()).thenReturn(<span class="keyword">true</span>); </span><br><span class="line">    Assert.assertTrue(file.exists(); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 3、Mock普通对象的final方法</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testCallFinalMethod</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">    ClassDependency depencency = PowerMockito.mock(ClassDependency.class);  </span><br><span class="line">    ClassUnderTest underTest = <span class="keyword">new</span> ClassUnderTest();  </span><br><span class="line">    PowerMockito.when(depencency.isAlive()).thenReturn(<span class="keyword">true</span>);  </span><br><span class="line">    Assert.assertTrue(underTest.callFinalMethod(depencency)); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 4、Mock静态方法</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testCallStaticMethod</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">    ClassUnderTest underTest = <span class="keyword">new</span> ClassUnderTest();  </span><br><span class="line">    PowerMockito.mockStatic(ClassDependency.class);  </span><br><span class="line">    PowerMockito.when(ClassDependency.isExist()).thenReturn(<span class="keyword">true</span>);  </span><br><span class="line">    Assert.assertTrue(underTest.callStaticMethod());  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 5、Mock私有方法</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testCallPrivateMethod</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;  </span><br><span class="line">    ClassUnderTest underTest = PowerMockito.mock(ClassUnderTest.class);  </span><br><span class="line">    PowerMockito.when(underTest,<span class="string">"callPrivateMethod"</span>).thenCallRealMethod(); </span><br><span class="line">    Assert.assertTrue(underTest.callPrivateMethod());  </span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/单元测试/" rel="tag"># 单元测试</a>
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/21/深入浅析内存/" rel="next" title="深入浅析内存">
+                <i class="fa fa-chevron-left"></i> 深入浅析内存
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/21/SeaweedFS/" rel="prev" title="SeaweedFS">
+                SeaweedFS <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div class="ds-thread" data-thread-key="2019/08/21/powermock/" data-title="Mockito和PowerMock用法" data-url="http://yoursite.com/2019/08/21/powermock/">
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">俞超超</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Mockito和PowerMock用法"><span class="nav-number">1.</span> <span class="nav-text">Mockito和PowerMock用法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、mock测试和Mock对象"><span class="nav-number">1.1.</span> <span class="nav-text">一、mock测试和Mock对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Mockito和PowerMock"><span class="nav-number">1.2.</span> <span class="nav-text">二、Mockito和PowerMock</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、Mockito的使用"><span class="nav-number">1.3.</span> <span class="nav-text">三、Mockito的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、PowerMock的使用"><span class="nav-number">1.4.</span> <span class="nav-text">四、PowerMock的使用</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">俞超超</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"fl-it-ebooks"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
