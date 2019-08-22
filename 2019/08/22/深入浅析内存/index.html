@@ -58,23 +58,23 @@
 <meta name="keywords" content="java,内存">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深入浅析内存">
-<meta property="og:url" content="http://yoursite.com/2019/08/21/深入浅析内存/index.html">
+<meta property="og:url" content="http://yoursite.com/2019/08/22/深入浅析内存/index.html">
 <meta property="og:site_name" content="MysticalYcc">
 <meta property="og:description" content="最近在看一本中看到了有关内存的相关知识，自己这方面比较薄弱，就想着记录下来。书本地址：www.zhihu.com/pub/book/119572875">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190821083529657.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190821083251761.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190821083552289.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190821184315332.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190821184056785.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190821184111336.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190821184124893.png">
-<meta property="og:updated_time" content="2019-08-21T10:45:13.346Z">
+<meta property="og:image" content="http://yoursite.com/2019/08/22/深入浅析内存/images/storage/srqxnc_1.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/22/深入浅析内存/images/storage/srqxnc_2.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/22/深入浅析内存/images/storage/srqxnc_3.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/22/深入浅析内存/images/storage/srqxnc_4.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/22/深入浅析内存/images/storage/srqxnc_5.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/22/深入浅析内存/images/storage/srqxnc_6.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/22/深入浅析内存/images/storage/srqxnc_7.png">
+<meta property="og:updated_time" content="2019-08-22T10:15:46.243Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入浅析内存">
 <meta name="twitter:description" content="最近在看一本中看到了有关内存的相关知识，自己这方面比较薄弱，就想着记录下来。书本地址：www.zhihu.com/pub/book/119572875">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190821083529657.png">
-  <link rel="canonical" href="http://yoursite.com/2019/08/21/深入浅析内存/">
+<meta name="twitter:image" content="http://yoursite.com/2019/08/22/深入浅析内存/images/storage/srqxnc_1.png">
+  <link rel="canonical" href="http://yoursite.com/2019/08/22/深入浅析内存/">
 
 
 <script id="page-configurations">
@@ -214,7 +214,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/21/深入浅析内存/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/22/深入浅析内存/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="俞超超">
@@ -242,7 +242,7 @@
                 
               
 
-              <time title="Created: 2019-08-21 18:45:13" itemprop="dateCreated datePublished" datetime="2019-08-21T18:45:13+08:00">2019-08-21</time>
+              <time title="Created: 2019-08-22 18:15:46" itemprop="dateCreated datePublished" datetime="2019-08-22T18:15:46+08:00">2019-08-22</time>
             </span>
           
             <span class="post-meta-item">
@@ -294,7 +294,7 @@
 </blockquote>
 <p>&nbsp; &nbsp;Cache是被集成到CPU内部的一个存储单元，一级Cache(L1 Cache)通常只有32~64KB的容量，这个容量远远不能满足CPU大量、告诉存取的需求。此外，由于存储性能的答复提升往往伴随着价格的同步飙升，所以出于对整体成本的控制，现实中往往采用金字塔形的多级Cache体系来实现最佳缓存效果，于是出现了二级Cache(L2 Cache)及三级Cache(L3 Cache)，每一级Cache都牺牲了部分性能指标来换取更大的容量，目的是缓存更多的热点数据。以Intel家族 Intel Sandy Bridge架构的CPU为例，其L1 Cache容量为64KB，访问速度为1ns左右；L2 Cache容量扩大4倍，达到256KB，访问速度则降低到3ns左右；L3 Cache的容量则扩大512倍，达到32MB，访问速度也下降到12ns左右，即使如此，也比访问驻村的100ns(40ns+65ns)快一个数量级。此外，L3 Cache是被一个Socket上的所有CPU Core共享的，其实最早的L3 Cache被应用在AMD发布的K6-III处理器上，当时的L3 Cache受限于制造工艺，并没有被集成到CPU内部，而是集成到主板上。</p>
 <p>&nbsp; &nbsp;从Intel Sandy Bridge CPU架构图中可以看出，CPU如果要访问内存中的数据，则要经过L1、L2、L3这三道关卡后才能抵达目的地，这个过程并不是「皇上」(CPU)亲自出马，而是交由3个级别的贵妃(Cache)们层层转发「圣旨」(内部指令)，最红抵达「后宫」(内存).</p>
-<p><img src="https://img-blog.csdnimg.cn/20190821083529657.png" alt="1565571049876"></p>
+<p><img src="images/storage/srqxnc_1.png" alt="1565571049876"></p>
 <hr>
 <h3 id="多核CPU与内存共享的问题"><a href="#多核CPU与内存共享的问题" class="headerlink" title="多核CPU与内存共享的问题"></a>多核CPU与内存共享的问题</h3><p>&nbsp; &nbsp;在多核CPU的情况下，如何共享内存？</p>
 <p>&nbsp; &nbsp;如果擅长多线程高级编程，那么肯定会毫不犹豫地给出以下伪代码：</p>
@@ -303,7 +303,7 @@
 <p>&nbsp; &nbsp;如果真这个简单，那么这个世界上就不会只剩下两家独大的主流CPU制造商了，而且可怜的AMD一直被Intel「吊打」。</p>
 <p>&nbsp; &nbsp;多核CPU共享内存的问题也被称为Cache一致性问题，简单地说，就是多个CPU核心所看到的Cache数据应该是一直的，在某个数据被某个CPU写入自己的Cache(L1 Cache)以后，其他CPU都应该能看到相同的Cache数据；如果自己的Cache中有旧数据，则抛弃旧数据。考虑到每个CPU有自己内存独占的Cache，所以这个问题与分布式Cache保持同步的问题是同一类问题。来自Intel的MESI协议是目前业界公认的Cache一致性问题的最佳方案，大多数SMP架构都采用这一方案，虽然该协议是一个CPU内部的协议，但由于它对我们理解内存模型及解决分布式系统的数据一致性问题有重要的参考价值，所以在这对其进行简单介绍。</p>
 <p>&nbsp; &nbsp;Cache Line，如果有印象的话，则你会发现I/O操作从来不以字节为单位，而是以「块」为单位，这里有两个原因：首先，因为I/O操作比较慢，所以读一个字节与一个读连续N个字节所花费的时间基本相同；其次，数据访问往往具有空间连续性地特征，即我们通常会访问空间上连续的一些数据。举个例子，访问数组时通常会循环遍历，比如查找某个值或者进行比较等，如果把数组中连续的几个字节都读到内存中，那么CPU的处理速度会提升几倍。对于CPU来说，由于Memory也是慢速的外部组件，所以针对Memory的读写也采用类似I/O块的方式就不足为奇了。实际上，CPU Cache里的最小存储单元就是Cache Line，Intel CPU的一个Cache Line存储64个字节，每一级Cache都被划分为很多组Cache Line，典型的情况是4条Cache Line为一组，当Cache从Memory中加载数据时，一次加载一条Cache Line的数据。下图是Cache的结构。</p>
-<p><img src="https://img-blog.csdnimg.cn/20190821083251761.png" alt="1565572262318"></p>
+<p><img src="images/storage/srqxnc_2.png" alt="1565572262318"></p>
 <p>&nbsp; &nbsp;每个Cache Line的头部有两个Bit来表示自身的状态，总共4种状态。</p>
 <blockquote>
 <ul>
@@ -314,7 +314,7 @@
 </ul>
 </blockquote>
 <p>&nbsp; &nbsp;MESI协议是用Cache Line的上述4种状态命名的，对Cache的读写操作引发了Cache Line的状态变化，因而可以理解为一种状态机模型。但MESI的复杂和独特之处在于状态的两种视角：一种是当前读写操作(Local Read/Write)所在CPU看到的自身的Cache Line状态及其他CPU上对应的Cache Line状态；另一种是一个CPU上的Cache Line状态的变迁会导致其他CPU上对应的Cache Line的状态变迁。如下所示为MESI协议的状态图。</p>
-<p><img src="https://img-blog.csdnimg.cn/20190821083552289.png" alt="1565573021589"></p>
+<p><img src="images/storage/srqxnc_3.png" alt="1565573021589"></p>
 <p>&nbsp; &nbsp;结合状态图，我们深入分析MESI协议的一些实现细节。</p>
 <p>&nbsp; &nbsp;（1）某个CPU(CPU A)发起本地读请求(Local Read)，比如读取某个内存地址的变量，如果此时所有的CPU的Cache中都没有加载此内存地址，即此内存地址对应的Cache Line为无效状态(Invalid)，则CPU A中的Cache会发起一个到Memory的内存Load指令，在相应的Cache Line中完成内存加载后，此Cache Line的状态会被标记位Exclusive。接下来，如果其他CPU(CPU B)在总线上也发起对同一个内存地址的读请求，则这个读请求会被CPU A 嗅探到(SNOOP),然后CPU A在内存总线上复制一份Cache Line作为应答，并将自身的Cache Line状态改为Shared，同时CPU B收到来自总线的应答并保存到自己的Cache里，也修改对应的Cache Line 状态为Shared。</p>
 <p>&nbsp; &nbsp;(2)某个CPU(CPU A)发起本地写请求(Loacl Write),比如对某个内存地址的变量赋值，如果此时多有的CPU的Cache中都没加载此内存地址，即此内存对应的Cache Line为无效状态(Invalid)，则CPU A 中的Cache Line保存了最新的内存变量值后，其祖航太修改为Modified。随后，如果CPU B发起对同一个变量的读操作(Remote Read)，则CPU A在总线嗅探到这个读请求以后，先将Cache Line里修改过的数据回写(Write Back)到Memory中，然后在内存总线上复制一份Cache Line作为应答，最后将自身的Cache Line状态修改为Shared，由此产生的结果是CPU A与CPU B里对应的Cache Line状态都为Shared。</p>
@@ -343,19 +343,19 @@
 </tr>
 </tbody></table>
 <p> &nbsp; &nbsp;我们知道，X86的CPU中Cache Line的长度为64字节，这也就意味着MyObject的3个属性(长度之和为24字节)是完全可能加载在一个Cache Line里的。如此一来，如果我们有两个不同的线程(分别运行在两个CPU上)分别同时独立修改a与b这两个属性，那么这两个CPU上的Cache Line可能出现如下所示的情况，即a与b这两个变量被放入同一个Cache Line里，并且被两个不同的CPU共享。</p>
-<p><img src="https://img-blog.csdnimg.cn/20190821184315332.png" alt="1566381303626"></p>
+<p><img src="images/storage/srqxnc_4.png" alt="1566381303626"></p>
 <p>&nbsp; &nbsp;根据上节中MESI协议的相关知识，我们知道，如果Thread 0要对a变量进行修改，则因为CPU 1 上有对应的Cache Line ， 这会导致CPU 1 的Cache Line 无效，从而使得Thread 1 被迫重新从Memory里获取b的内容(b并没有被其他CPU改变，这样做是因为b与a在一个Cache Line里)。同样，如果Thread 1 要对b变量进行修改，则同样导致Thread 0 的Cache Line 失效，不得不重新从Memory里加载a。如此一来，本来是逻辑上无关的两个线程，完全可以在两个不同的CPU上同时执行，但阴差阳错地共享了同一个Cache Line 并相互抢占资源，导致并形成为串行，大大降低了系统的并发性，这就是所谓的Cache伪共享。</p>
 <p>&nbsp; &nbsp;解决Cache伪共享问题的方法很简单，将a与b两个变量分到不同的Cache Line里，通常可以用一些无用的字段填充a与b之间的空隙。由于伪共享问题对性能的影响比较大，所以JDK 8 首次提供了正式的普适性的方案，即采用@Contended注解来确保一个Object或者Class里的某个属性与其他属性不在一个Cache Line里，下面的VolatileLong的多个实例之间就不会产生Cache伪共享的问题：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Contended</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">VolatileLong</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">volatile</span> <span class="keyword">long</span> value = <span class="number">0L</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="深入理解不一致性内存"><a href="#深入理解不一致性内存" class="headerlink" title="深入理解不一致性内存"></a>深入理解不一致性内存</h3><p>&nbsp; &nbsp;MESI协议解决了多核CPU下的Cache一致性问题，因而成为SMP架构的唯一选择。SMP架构近几年迅速在PC领域(X86)发展，一个CPU芯片上集成的CPU核心数量越来越多，到2017年，AMD的ZEN系列处理器就已经达到16核心32线程了。SMP架构是一种平行的结果，所有CPU Core都连接到一个内存总线上，他们平等访问内存，同时整个内存是统一结构、统一寻址的(Uniform Memory Architecture , UMA)。如下所示给出了SMP架构的示意图。</p>
-<p><img src="https://img-blog.csdnimg.cn/20190821184056785.png" alt="1566382149967"></p>
+<p><img src="images/storage/srqxnc_5.png" alt="1566382149967"></p>
 <p>&nbsp; &nbsp;但是，随着CPU核心数量的不断增长，SMP架构也暴露其天生的短板，其根本瓶颈是共享内存总线的宽带无法满足CPU数量的增加，同时，一条「马路」上同行的「车」多了，难免陷入「拥堵模式」。在这种情况下，分布式解决方案应运而生，系统的内存与CPU进行分割并绑定在一起，形成多个独立的子系统，这些子系统之间高速互连，这就是所谓的NUMA（None Uniform Memory Architecture）架构，如下图所示：</p>
-<p><img src="https://img-blog.csdnimg.cn/20190821184111336.png" alt="1566382356771"></p>
+<p><img src="images/storage/srqxnc_6.png" alt="1566382356771"></p>
 <p>&nbsp; &nbsp;我们可以认为NUMA架构第1次打破了「大锅饭」的模式，内存不在是一个整体，而是被分割为互相独立的几块，被不同的CPU私有化(Attach到不同的CPU上)。因此，当CPU访问自身私有的内存地址时（Local Access），会很快得到响应，而如果需要访问其他CPU控制的内存数据（Remote Access），则需要通过某种互连通道（Inter-connect通道）访问，响应时间与之前相对变慢。NUMA的主要优点是伸缩性，NUMA的这种体系结构在设计上已经超越了SMP，可以扩展到几百个CPU而不会导致性能的严重下降。</p>
 <p>&nbsp; &nbsp;NUMA技术最早出现出现在20世纪80年代，主要运行在一些大中型UNIX系统中，Sequent公司是世界公认的NUMA技术领袖。早在1986年，Sequent公司就率先利用微处理器构建大型系统，开发了基于UNIX的SMP体系结构，开创了业界转入SMP领域的先河。1999年9月，IBM公司收购了Sequent公司，将NUMA技术集成到IBM UNIX阵营中，并推出了能够支持和扩展Intel平台的NUMA-Q系统及方案，为全球大型企业客户适应高速发展的电子商务市场提供了更加多样化、高可扩展性及易于管理的选择，成为NUMA技术的领先开发者与革新者。随后很多老牌UNIX服务器厂商也采用了NUMA技术，例如IBM、Sun、惠普、Unisys、SGI等公司。2000年全球互联网泡沫破灭后，X86+Linux系统开始以低廉的成本侵占UNIX的底盘，AMD率先在其AMD Opteron 系列处理器中的X86 CPU上实现了NUMA架构，Intel也跟进并在Intel Nehalem中实现了NUMA架构（Intel服务器芯片志强E5500以上的CPU和桌面的i3、i5、i7均采用此架构），至此NUMA这个贵族技术开始真正走入平常百姓家。</p>
 <p>&nbsp; &nbsp;下面详细分析一下NUMA技术的特点。首先，NUMA架构中引入了一个重要的新名词——Node，一个Node由一个或者多个Socket组成，即物理上的一个或多个CPU芯片组成一个逻辑上的Node。如下所示为来自Dell PowerEdge系统服务器的说明手册中的NUMA的图片，4个Intel Xeon E 5-4600处理器形成4个独立的NUMA Node，由于每个Intel Xeon E 5-4600为8Core，支持双线程，所以每个Node里的Logic CPU数量为16个，占每个Node分配系统总内存1/4，每个Node之间通过Intel QPI（QuickPath Interconnect）技术形成了点到点的全互连处理器系统。</p>
-<p><img src="https://img-blog.csdnimg.cn/20190821184124893.png" alt="1566383334597"></p>
+<p><img src="images/storage/srqxnc_7.png" alt="1566383334597"></p>
 <p>&nbsp; &nbsp;其次，我们看到NUMA这种基于点到点的全互连处理器系统与传统的基于共享总线的处理器系统的SMP还是有巨大差异的。在这种情况下无法通过嗅探总线的方式来实现Cache一致性，因此为了实现NUMA架构下的Cache一致性，Intel引入了MESI协议的一个扩展写协议——MESIF。MESIF采用了一种基于目录表的实现方案，该协议由Boxboro-EX处理器系统实现，但独立研究MESIF协议并没有太大的意义，因为目前Intel并没有公开Boxbore-EX处理器系统的详细设计文档。</p>
 <p>&nbsp; &nbsp;最后，我们说说NUMA架构的当前困境与我们对未来的展望。</p>
 <p>&nbsp; &nbsp;NUMA架构由于打破了传统的「全局内存」概念，目前在编程语言方面还没有任何一种语言从内存模型上支持它，所以当前很难开发适应NUMA的软件。但这方面已经有很多尝试和进展了。Java在支持NUMA的系统里，可以开启基于NUMA的内存分配方案，使得当前线程所需要的内存从对应的Node上分配，从而大大加快对象的创建过程。在大数据领域，NUMA系统正在发挥着越来越强的作用，SAP的高端大数据系统HANA被SGI在其UV NUMA Systems上实现了良好的水平扩展。据说微软将会把SQL Server引入到Linux上，如此一来，很多潜在客户将有机会在SGI提供的大型NUMA机器上高速运行多个SQL Server实例。在云计算与虚拟化方面。OpenStack与VMware已经支持基于NUMA技术的虚机分配能力，使得不同的虚机运行在不同的Core上，同时虚机的内存不会跨越多个NUMA Node。</p>
