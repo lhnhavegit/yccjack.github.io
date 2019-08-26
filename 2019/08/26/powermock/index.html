@@ -58,15 +58,15 @@
 <meta name="keywords" content="单元测试,java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mockito和PowerMock用法">
-<meta property="og:url" content="http://106.53.64.58/2019/08/25/powermock/index.html">
+<meta property="og:url" content="http://106.53.64.58/2019/08/26/powermock/index.html">
 <meta property="og:site_name" content="MysticalYcc">
 <meta property="og:description" content="在单元测试中，我们往往想去独立地去测一个类中的某个方法，但是这个类可不是独立的，它会去调用一些其它类的方法和service，这也就导致了以下两个问题：外部服务可能无法在单元测试的环境中正常工作，因为它们可能需要访问数据库或者使用一些其它的外部系统。我们的测试关注点在于这个类的实现上，外部类的一些行为可能会影响到我们对本类的测试，那也就失去了我们进行单测的意义。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-25T00:39:18.470Z">
+<meta property="og:updated_time" content="2019-08-26T00:45:34.791Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mockito和PowerMock用法">
 <meta name="twitter:description" content="在单元测试中，我们往往想去独立地去测一个类中的某个方法，但是这个类可不是独立的，它会去调用一些其它类的方法和service，这也就导致了以下两个问题：外部服务可能无法在单元测试的环境中正常工作，因为它们可能需要访问数据库或者使用一些其它的外部系统。我们的测试关注点在于这个类的实现上，外部类的一些行为可能会影响到我们对本类的测试，那也就失去了我们进行单测的意义。">
-  <link rel="canonical" href="http://106.53.64.58/2019/08/25/powermock/">
+  <link rel="canonical" href="http://106.53.64.58/2019/08/26/powermock/">
 
 
 <script id="page-configurations">
@@ -186,7 +186,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">10</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">11</span></a>
 
   </li>
       
@@ -212,7 +212,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">7</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">8</span></a>
 
   </li>
   </ul>
@@ -240,7 +240,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://106.53.64.58/2019/08/25/powermock/">
+    <link itemprop="mainEntityOfPage" href="http://106.53.64.58/2019/08/26/powermock/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="俞超超">
@@ -268,7 +268,7 @@
                 
               
 
-              <time title="创建时间：2019-08-25 08:39:18" itemprop="dateCreated datePublished" datetime="2019-08-25T08:39:18+08:00">2019-08-25</time>
+              <time title="创建时间：2019-08-26 08:45:34" itemprop="dateCreated datePublished" datetime="2019-08-26T08:45:34+08:00">2019-08-26</time>
             </span>
           
             <span class="post-meta-item">
@@ -298,9 +298,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Mockito和PowerMock用法"><a href="#Mockito和PowerMock用法" class="headerlink" title="Mockito和PowerMock用法"></a>Mockito和PowerMock用法</h1><hr>
-<hr>
-<h2 id="一、mock测试和Mock对象"><a href="#一、mock测试和Mock对象" class="headerlink" title="一、mock测试和Mock对象"></a>一、mock测试和Mock对象</h2><p>mock对象就是在调试期间用来作为真实对象的替代品<br>mock测试就是在测试过程中，对那些不容易构建的对象用一个虚拟对象来代替测试的方法就叫mock测试</p>
+        <h2 id="一、mock测试和Mock对象"><a href="#一、mock测试和Mock对象" class="headerlink" title="一、mock测试和Mock对象"></a>一、mock测试和Mock对象</h2><p>mock对象就是在调试期间用来作为真实对象的替代品<br>mock测试就是在测试过程中，对那些不容易构建的对象用一个虚拟对象来代替测试的方法就叫mock测试</p>
 <h2 id="二、Mockito和PowerMock"><a href="#二、Mockito和PowerMock" class="headerlink" title="二、Mockito和PowerMock"></a>二、Mockito和PowerMock</h2><p>  PowerMock是Java开发中的一种Mock框架，用于单元模块测试。当你想要测试一个service接口，但service需要经过防火墙访问，防火墙不能为你打开或者你需要认证才能访问。遇到这样情况时，你可以在你能访问的地方使用MockService替代，模拟实现获取数据。<br>  PowerMock可以实现完成对private/static/final方法的Mock（模拟），而Mockito可以对普通的方法进行Mock，如：public等。</p>
 <h2 id="三、Mockito的使用"><a href="#三、Mockito的使用" class="headerlink" title="三、Mockito的使用"></a>三、Mockito的使用</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1、模拟HttpServletRequest对象，不需要依赖web容器，模拟获得请求参数</span></span><br><span class="line">HttpServletRequest request = mock(HttpServletRequest.class); </span><br><span class="line">when(request.getParameter(<span class="string">"foo"</span>)).thenReturn(<span class="string">"boo"</span>);</span><br><span class="line"><span class="comment">// 注意:mock()是Mockito的静态方法，可以用@mock注解替换</span></span><br><span class="line"><span class="keyword">private</span> <span class="meta">@mock</span> HttpServletRequest request</span><br></pre></td></tr></table></figure>
 
@@ -363,8 +361,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/08/25/mysql/" rel="next" title="MySQL架构与历史">
-                  <i class="fa fa-chevron-left"></i> MySQL架构与历史
+                <a href="/2019/08/26/mysql/" rel="next" title="MySQL">
+                  <i class="fa fa-chevron-left"></i> MySQL
                 </a>
               
             </div>
@@ -373,8 +371,8 @@
 
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/2019/08/25/sonarqubSonar/" rel="prev" title="sonarQube">
-                  sonarQube <i class="fa fa-chevron-right"></i>
+                <a href="/2019/08/26/SeaweedFS/" rel="prev" title="SeaweedFS">
+                  SeaweedFS <i class="fa fa-chevron-right"></i>
                 </a>
               
             </div>
@@ -432,7 +430,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -490,7 +488,9 @@
         
           
         
-        <span class="site-state-item-count">10</span>
+          
+        
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -536,7 +536,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Mockito和PowerMock用法"><span class="nav-number">1.</span> <span class="nav-text">Mockito和PowerMock用法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、mock测试和Mock对象"><span class="nav-number">1.1.</span> <span class="nav-text">一、mock测试和Mock对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Mockito和PowerMock"><span class="nav-number">1.2.</span> <span class="nav-text">二、Mockito和PowerMock</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、Mockito的使用"><span class="nav-number">1.3.</span> <span class="nav-text">三、Mockito的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、PowerMock的使用"><span class="nav-number">1.4.</span> <span class="nav-text">四、PowerMock的使用</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、mock测试和Mock对象"><span class="nav-number">1.</span> <span class="nav-text">一、mock测试和Mock对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Mockito和PowerMock"><span class="nav-number">2.</span> <span class="nav-text">二、Mockito和PowerMock</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、Mockito的使用"><span class="nav-number">3.</span> <span class="nav-text">三、Mockito的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、PowerMock的使用"><span class="nav-number">4.</span> <span class="nav-text">四、PowerMock的使用</span></a></li></ol></div>
             
 
           </div>
